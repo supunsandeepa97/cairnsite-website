@@ -7,3 +7,5 @@ _*.png
 
 # vercel local
 .vercel/
+
+.vercel
