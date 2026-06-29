@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do you need a website if you have social media?</title>
+<meta name="description" content="You've got Facebook and Instagram — so do you still need a website? Here's the honest answer, what social media can and can't do for your business, and how they work best together.">
+<link rel="canonical" href="https://cairnsite.vercel.app/guides/website-vs-social-media.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0A4F33">
+<meta name="author" content="Cairnsite">
+<link rel="icon" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/logo.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Do you need a website if you have social media?">
+<meta property="og:description" content="You've got Facebook and Instagram — so do you still need a website? Here's the honest answer, what social media can and can't do for your business, and how they work best together.">
+<meta property="og:url" content="https://cairnsite.vercel.app/guides/website-vs-social-media.html">
+<meta property="og:site_name" content="Cairnsite">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cairnsite.vercel.app/guides/assets/website-vs-social-media.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A website and social media apps side by side, illustrated in Cairnsite green">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Do you need a website if you have social media?">
+<meta name="twitter:description" content="You've got Facebook and Instagram — so do you still need a website? Here's the honest answer, what social media can and can't do for your business, and how they work best together.">
+<meta name="twitter:image" content="https://cairnsite.vercel.app/guides/assets/website-vs-social-media.png">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BlogPosting","headline":"Do you need a website if you have Facebook or Instagram?","description":"You've got Facebook and Instagram — so do you still need a website? Here's the honest answer, what social media can and can't do for your business, and how they work best together.","image":"https://cairnsite.vercel.app/guides/assets/website-vs-social-media.png","datePublished":"2026-06-29","dateModified":"2026-06-29","author":{"@type":"Organization","name":"Cairnsite","url":"https://cairnsite.vercel.app/"},"publisher":{"@type":"Organization","name":"Cairnsite","logo":{"@type":"ImageObject","url":"https://cairnsite.vercel.app/assets/logo.png"}},"mainEntityOfPage":"https://cairnsite.vercel.app/guides/website-vs-social-media.html","inLanguage":"en"},
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://cairnsite.vercel.app/"},
+{"@type":"ListItem","position":2,"name":"Guides","item":"https://cairnsite.vercel.app/guides/"},
+{"@type":"ListItem","position":3,"name":"Do you need a website if you have Facebook or Instagram?","item":"https://cairnsite.vercel.app/guides/website-vs-social-media.html"}
+]}
+]}
+</script>
+<style>
+  :root{
+    --cairn:#0A4F33;
+    --cairn-bright:#0F7A4D;
+    --ink:#15201A;
+    --paper:#F5F7F4;
+    --wa:#25D366;
+    /* derived */
+    --stone:#C9B79C;        /* warm sand stone */
+    --stone-dk:#A8916F;
+    --line:rgba(21,32,26,.12);
+    --paper-2:#ECEFEA;
+    --ink-soft:#46524A;
+    --emerald-tint:#E4EDE7;
+    --maxw:1180px;
+    --serif:Georgia,"Times New Roman","Iowan Old Style",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --radius:16px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--ink);margin:0;letter-spacing:-.01em;line-height:1.06}
+  p{margin:0}
+  a{color:inherit}
+  img,svg{max-width:100%}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--cairn-bright);font-family:var(--sans);
+  }
+
+  /* ---- skip link ---- */
+  .skip{
+    position:absolute;left:12px;top:-60px;background:var(--cairn);color:#fff;
+    padding:10px 16px;border-radius:10px;z-index:200;transition:top .15s ease;text-decoration:none;font-weight:600;
+  }
+  .skip:focus{top:12px}
+
+  /* ---- focus visibility ---- */
+  a:focus-visible,button:focus-visible{
+    outline:3px solid var(--cairn-bright);outline-offset:3px;border-radius:6px;
+  }
+
+  /* ---- buttons ---- */
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--sans);font-weight:600;font-size:15px;line-height:1;
+    padding:14px 22px;border-radius:999px;text-decoration:none;border:1.5px solid transparent;
+    cursor:pointer;transition:transform .14s ease,background .14s ease,box-shadow .14s ease,border-color .14s ease;
+  }
+  .btn svg{flex:0 0 auto}
+  .btn-wa{background:var(--wa);color:#06351c;box-shadow:0 8px 22px rgba(37,211,102,.32)}
+  .btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(37,211,102,.4)}
+  .btn-ghost{background:transparent;color:var(--cairn);border-color:rgba(10,79,51,.32)}
+  .btn-ghost:hover{border-color:var(--cairn);background:rgba(10,79,51,.05)}
+  .btn-lg{padding:17px 28px;font-size:16px}
+  @media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+
+  /* ---- header ---- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(245,247,244,.78);
+    backdrop-filter:saturate(150%) blur(14px);
+    -webkit-backdrop-filter:saturate(150%) blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .hbar{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none}
+  .wordmark{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--ink);letter-spacing:-.015em}
+  .wordmark b{color:var(--cairn)}
+  nav.main{display:none;gap:30px;align-items:center}
+  nav.main a{
+    text-decoration:none;font-size:15px;font-weight:500;color:var(--ink-soft);
+    position:relative;padding:4px 0;transition:color .14s ease;
+  }
+  nav.main a:hover{color:var(--cairn)}
+  nav.main a::after{
+    content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--cairn-bright);transition:right .2s ease;
+  }
+  nav.main a:hover::after{right:0}
+  .header-cta{display:none}
+  @media (min-width:880px){
+    nav.main{display:flex}
+    .header-cta{display:inline-flex}
+  }
+
+  /* ---- footer ---- */
+  footer{background:var(--ink);color:rgba(255,255,255,.7);padding:48px 0 40px}
+  .foot-top{display:flex;flex-direction:column;gap:24px}
+  .foot-brand .wordmark{color:#fff}
+  .foot-brand .wordmark b{color:#7fd3a8}
+  .foot-tag{font-size:14.5px;margin-top:12px;max-width:34ch}
+  .foot-nav{display:flex;flex-wrap:wrap;gap:22px}
+  .foot-nav a{text-decoration:none;color:rgba(255,255,255,.72);font-size:14.5px;transition:color .14s ease}
+  .foot-nav a:hover{color:#fff}
+  .foot-bottom{
+    margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);
+    font-size:13.5px;color:rgba(255,255,255,.5);display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;
+  }
+  @media (min-width:760px){
+    .foot-top{flex-direction:row;justify-content:space-between;align-items:flex-start}
+  }
+
+  /* ---- article ---- */
+  .article{padding:40px 0 72px}
+  .breadcrumb{font-size:13.5px;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+  .breadcrumb a{text-decoration:none;color:var(--cairn-bright);font-weight:500}
+  .breadcrumb a:hover{text-decoration:underline}
+  .breadcrumb span[aria-current]{color:var(--ink-soft)}
+  .breadcrumb .sep{color:rgba(21,32,26,.35)}
+
+  .a-hero{margin-top:28px;max-width:68ch}
+  .a-hero h1{font-size:clamp(32px,5.4vw,50px);margin-top:12px;line-height:1.04}
+  .a-meta{margin-top:16px;font-size:14.5px;color:var(--ink-soft);font-weight:500}
+
+  .a-body{max-width:68ch;margin:0 auto}
+  .a-body h2{font-size:clamp(24px,3.6vw,32px);margin:42px 0 0}
+  .a-body h3{font-size:21px;margin:30px 0 0}
+  .a-body p{margin-top:18px;color:var(--ink);font-size:17.5px;line-height:1.72}
+  .a-body p.sub{color:var(--ink-soft)}
+  .a-body ul{margin:16px 0 0;padding-left:22px;color:var(--ink)}
+  .a-body li{margin-top:10px;line-height:1.66}
+  .a-body strong{color:var(--ink)}
+  .a-body a{color:var(--cairn-bright);font-weight:500}
+
+  /* ---- CTA box ---- */
+  .cta-box{
+    max-width:68ch;margin:48px auto 0;background:var(--emerald-tint);
+    border:1px solid rgba(10,79,51,.18);border-radius:var(--radius);padding:30px 28px;
+  }
+  .cta-box h2{font-size:23px;margin:0}
+  .cta-box p{margin-top:10px;color:var(--ink-soft);font-size:16px}
+  .cta-box .btn-row{margin-top:22px}
+
+  /* ---- related ---- */
+  .related{max-width:68ch;margin:52px auto 0;padding-top:30px;border-top:1px solid var(--line)}
+  .related .eyebrow{display:block}
+  .rel-list{margin-top:18px;display:grid;gap:14px}
+  .rel-card{
+    display:block;text-decoration:none;background:var(--paper);border:1px solid var(--line);
+    border-radius:14px;padding:18px 20px;transition:border-color .14s ease,transform .14s ease,box-shadow .14s ease;
+  }
+  .rel-card:hover{border-color:rgba(10,79,51,.3);transform:translateX(3px);box-shadow:0 12px 26px -20px rgba(10,79,51,.5)}
+  @media (prefers-reduced-motion:reduce){.rel-card:hover{transform:none}}
+  .rel-card .rt{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink)}
+  .rel-card .rd{font-size:14px;color:var(--ink-soft);margin-top:4px}
+  .rel-back{display:inline-block;margin-top:22px;font-size:15px;font-weight:600;color:var(--cairn-bright);text-decoration:none}
+  .rel-back:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap hbar">
+    <a class="brand" href="/" aria-label="Cairnsite home">
+      <!-- LOGO: stacked cairn + spark -->
+      <svg width="30" height="38" viewBox="0 0 30 38" fill="none" aria-hidden="true" focusable="false">
+        <g fill="var(--cairn)">
+          <path d="M15 0.5c.4 2 .9 2.6 2.7 3-1.8.4-2.3 1-2.7 3-.4-2-.9-2.6-2.7-3 1.8-.4 2.3-1 2.7-3z"/>
+          <rect x="6" y="9" width="18" height="7" rx="3.5"/>
+          <rect x="3.5" y="18" width="23" height="7.5" rx="3.75"/>
+          <rect x="7.5" y="27.5" width="15" height="7" rx="3.5"/>
+        </g>
+      </svg>
+      <span class="wordmark"><b>Cairn</b>site</span>
+    </a>
+
+    <nav class="main" aria-label="Primary">
+      <a href="/#how">How it works</a>
+      <a href="/#included">What's included</a>
+      <a href="/guides/">Guides</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+
+    <a class="btn btn-wa header-cta" href="https://wa.me/94704164060" aria-label="Message Cairnsite on WhatsApp">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43l-.48-.01c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.16 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+      WhatsApp us
+    </a>
+  </div>
+</header>
+
+<main id="main">
+<article class="article">
+  <div class="wrap">
+
+    <!-- breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep" aria-hidden="true">/</span>
+      <a href="/guides/">Guides</a>
+      <span class="sep" aria-hidden="true">/</span>
+      <span aria-current="page">Website vs social media</span>
+    </nav>
+
+    <!-- hero -->
+    <header class="a-hero">
+      <p class="eyebrow">Guide</p>
+      <h1>Do you need a website if you have Facebook or Instagram?</h1>
+      <p class="a-meta">By Cairnsite · 5 min read</p>
+    </header>
+
+    <img src="/guides/assets/website-vs-social-media.png" width="1200" height="630" alt="A website and social media apps side by side, illustrated in Cairnsite green" style="width:100%;height:auto;border-radius:16px;margin:24px 0">
+
+    <!-- body -->
+    <div class="a-body">
+      <p>It's one of the most common questions we hear from local business owners: "I already post on Facebook and Instagram, and people find me there — so do I really need a website too?" It's a fair question. Social media is free, it's familiar, and you can update it from your phone in seconds. Setting up a whole website can feel like extra work you don't have time for. So let's give you an honest answer, not a sales pitch.</p>
+
+      <h2>What social media does brilliantly</h2>
+      <p>First, let's give social media full credit, because it genuinely earns it. For a lot of local businesses, a Facebook or Instagram page is the easiest possible way to get started, and it does several things really well.</p>
+      <p><strong>It puts you in front of people every day.</strong> Your customers are already scrolling. A good photo of today's special, a short clip of your work, or a quick post about your opening hours can land right in front of someone who wasn't even looking for you — and that kind of casual reach is hard to match anywhere else.</p>
+      <p><strong>It's fast and free to post.</strong> You can share an update the moment it happens. No technical setup, no waiting. That immediacy is perfect for things that change often, like daily menus, last-minute availability, or a sudden "we're closing early today" notice.</p>
+      <p><strong>It builds community.</strong> People can comment, share, tag a friend, and message you directly. Reviews and word-of-mouth spread naturally. Social media is where conversations happen, and that human, back-and-forth side of your business deserves a place to live.</p>
+      <p class="sub">If you're using social media well, keep doing it. None of what follows is a reason to stop.</p>
+
+      <h2>What social media can't do well</h2>
+      <p>Here's the honest part. Social media is excellent at what it's built for, but there are real things it simply isn't designed to handle — and those gaps matter for a business.</p>
+      <ul>
+        <li><strong>You don't own it.</strong> Your page lives on someone else's platform. Accounts can be suspended, locked, or restricted with little warning and not much you can do about it. If that happens, you can lose your audience and your posts overnight. You're building on rented land, not your own.</li>
+        <li><strong>People struggle to find you on Google.</strong> When someone searches for "plumber near me" or "best bakery in town," they usually land on websites — not on a buried social profile. Social platforms aren't built to show up the way a proper web page does, so you can miss the people actively looking to buy.</li>
+        <li><strong>There's no single, tidy place for your key info.</strong> Your opening hours, location, phone number, and the services you offer end up scattered across old posts and a cramped bio. A customer who just wants to know "are they open and where are they?" has to dig for it.</li>
+        <li><strong>The feed buries everything.</strong> A post you wrote last month is effectively gone. The feed is always moving on to the newest thing, so anything important — your prices list, your story, your best work — slips out of view fast and is hard for anyone to find again.</li>
+        <li><strong>It can look less established.</strong> A page alone can read as casual or temporary. When a customer is deciding whether to trust you with their money, a business that also has its own website often simply feels more real and more permanent.</li>
+      </ul>
+
+      <h2>What a website adds</h2>
+      <p>A website isn't a flashier version of your social page — it does a different job. Think of it as the home base everything else points back to.</p>
+      <p><strong>A permanent home you control.</strong> Your website is yours. The address, the content, the look — none of it can be taken away by a platform's rules or an algorithm change. Whatever happens to any single social network, your website stays right where it is.</p>
+      <p><strong>It helps you show up in Google.</strong> A proper website is built to be found by search engines, so when someone in your area types in what they need, you have a real chance of appearing. That's traffic from people who are already looking to buy, not just scrolling past.</p>
+      <p><strong>One tidy place for everything.</strong> Hours, location with a map, phone number, the full list of what you offer, a few photos of your work, and a clear way to get in touch — all in one calm, organised place. No digging, no guessing.</p>
+      <p><strong>It looks credible.</strong> Having your own website signals that you're an established business that's here to stay. For a customer weighing up whether to call you, that quiet bit of reassurance can make the difference.</p>
+
+      <h2>The real answer: it's not either/or</h2>
+      <p>Here's the part people don't expect us to say: you don't have to choose. The question was never really "website or social media." The best setup uses both, because they're good at different things and they make each other stronger.</p>
+      <p>Picture it working together. Your <strong>website</strong> is the steady home base — the place with all your details, easy to find on Google, always there. Your <strong>social media</strong> is how you reach people day to day, share fresh updates, and build a following. Then you simply connect the two: your website links out to your social profiles so visitors can follow along, and your social bios link back to your website so anyone who's interested can find your full story, your hours, and a way to get in touch in one click.</p>
+      <p>When they're linked like that, each one covers the other's weak spot. Social brings the reach and the personality; the website provides the permanence, the findability, and the credibility. Someone discovers you on Instagram, taps the link in your bio, and lands somewhere that answers all their questions and earns their trust.</p>
+
+      <h2>So, our honest recommendation</h2>
+      <p>If you're happy on social media, keep it — it's doing real work for you. But don't rely on it as your only presence online. Adding a simple website gives you something you actually own, makes you easier to find when people are ready to buy, and gives every customer one clear, trustworthy place to learn about you. Used together, a website and your social pages are far stronger than either one alone. That's the setup we'd recommend for almost any local business.</p>
+    </div>
+
+    <!-- WhatsApp CTA -->
+    <aside class="cta-box">
+      <h2>Want to see a free sample of YOUR website?</h2>
+      <p>Message us on WhatsApp — no cost, no obligation. Tell us your business name and we'll prepare a real, working sample for you to look at.</p>
+      <div class="btn-row">
+        <a class="btn btn-wa btn-lg" href="https://wa.me/94704164060">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43l-.48-.01c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.16 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+          Message us on WhatsApp
+        </a>
+      </div>
+    </aside>
+
+    <!-- related guides -->
+    <nav class="related" aria-label="Related guides">
+      <span class="eyebrow">Related guides</span>
+      <div class="rel-list">
+        <a class="rel-card" href="/guides/why-your-small-business-needs-a-website.html">
+          <span class="rt">Why your small business needs a website</span>
+          <span class="rd">The simple case for having a home base online.</span>
+        </a>
+        <a class="rel-card" href="/guides/how-to-get-your-business-online.html">
+          <span class="rt">How to get your business online</span>
+          <span class="rd">A plain-English walkthrough of the first steps.</span>
+        </a>
+      </div>
+      <a class="rel-back" href="/guides/">← All guides</a>
+    </nav>
+
+  </div>
+</article>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="/" aria-label="Cairnsite home">
+          <svg width="28" height="36" viewBox="0 0 30 38" fill="none" aria-hidden="true" focusable="false">
+            <g fill="#7fd3a8">
+              <path d="M15 0.5c.4 2 .9 2.6 2.7 3-1.8.4-2.3 1-2.7 3-.4-2-.9-2.6-2.7-3 1.8-.4 2.3-1 2.7-3z"/>
+              <rect x="6" y="9" width="18" height="7" rx="3.5"/>
+              <rect x="3.5" y="18" width="23" height="7.5" rx="3.75"/>
+              <rect x="7.5" y="27.5" width="15" height="7" rx="3.5"/>
+            </g>
+          </svg>
+          <span class="wordmark"><b>Cairn</b>site</span>
+        </a>
+        <p class="foot-tag">A landmark online for local businesses that don't have one yet.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="/#how">How it works</a>
+        <a href="/#included">What's included</a>
+        <a href="/guides/">Guides</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://wa.me/94704164060">WhatsApp</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Cairnsite</span>
+      <span>Built fast by humans + AI.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

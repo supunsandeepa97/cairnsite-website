@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guides — Cairnsite</title>
+<meta name="description" content="Practical, plain-English guides to getting your local business online — from why you need a website to how to launch one without the tech headache.">
+<link rel="canonical" href="https://cairnsite.vercel.app/guides/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0A4F33">
+<meta name="author" content="Cairnsite">
+<link rel="icon" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/logo.png">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Guides — Cairnsite">
+<meta property="og:description" content="Practical, plain-English guides to getting your local business online — from why you need a website to how to launch one without the tech headache.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cairnsite.vercel.app/guides/">
+<meta property="og:site_name" content="Cairnsite">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cairnsite.vercel.app/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cairnsite — real websites for local businesses">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Guides — Cairnsite">
+<meta name="twitter:description" content="Practical, plain-English guides to getting your local business online — from why you need a website to how to launch one without the tech headache.">
+<meta name="twitter:image" content="https://cairnsite.vercel.app/assets/og-image.png">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"CollectionPage","name":"Guides","url":"https://cairnsite.vercel.app/guides/","description":"Practical, plain-English guides to getting your local business online — from why you need a website to how to launch one without the tech headache.","isPartOf":{"@type":"WebSite","url":"https://cairnsite.vercel.app/"}},
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://cairnsite.vercel.app/"},
+{"@type":"ListItem","position":2,"name":"Guides","item":"https://cairnsite.vercel.app/guides/"}
+]}
+]}
+</script>
+<style>
+  :root{
+    --cairn:#0A4F33;
+    --cairn-bright:#0F7A4D;
+    --ink:#15201A;
+    --paper:#F5F7F4;
+    --wa:#25D366;
+    /* derived */
+    --stone:#C9B79C;        /* warm sand stone */
+    --stone-dk:#A8916F;
+    --line:rgba(21,32,26,.12);
+    --paper-2:#ECEFEA;
+    --ink-soft:#46524A;
+    --emerald-tint:#E4EDE7;
+    --maxw:1180px;
+    --serif:Georgia,"Times New Roman","Iowan Old Style",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --radius:16px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--ink);margin:0;letter-spacing:-.01em;line-height:1.06}
+  p{margin:0}
+  a{color:inherit}
+  img,svg{max-width:100%}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--cairn-bright);font-family:var(--sans);
+  }
+
+  /* ---- skip link ---- */
+  .skip{
+    position:absolute;left:12px;top:-60px;background:var(--cairn);color:#fff;
+    padding:10px 16px;border-radius:10px;z-index:200;transition:top .15s ease;text-decoration:none;font-weight:600;
+  }
+  .skip:focus{top:12px}
+
+  /* ---- focus visibility ---- */
+  a:focus-visible,button:focus-visible{
+    outline:3px solid var(--cairn-bright);outline-offset:3px;border-radius:6px;
+  }
+
+  /* ---- buttons ---- */
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--sans);font-weight:600;font-size:15px;line-height:1;
+    padding:14px 22px;border-radius:999px;text-decoration:none;border:1.5px solid transparent;
+    cursor:pointer;transition:transform .14s ease,background .14s ease,box-shadow .14s ease,border-color .14s ease;
+  }
+  .btn svg{flex:0 0 auto}
+  .btn-wa{background:var(--wa);color:#06351c;box-shadow:0 8px 22px rgba(37,211,102,.32)}
+  .btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(37,211,102,.4)}
+  .btn-ghost{background:transparent;color:var(--cairn);border-color:rgba(10,79,51,.32)}
+  .btn-ghost:hover{border-color:var(--cairn);background:rgba(10,79,51,.05)}
+  .btn-lg{padding:17px 28px;font-size:16px}
+  @media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+
+  /* ---- header ---- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(245,247,244,.78);
+    backdrop-filter:saturate(150%) blur(14px);
+    -webkit-backdrop-filter:saturate(150%) blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .hbar{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none}
+  .wordmark{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--ink);letter-spacing:-.015em}
+  .wordmark b{color:var(--cairn)}
+  nav.main{display:none;gap:30px;align-items:center}
+  nav.main a{
+    text-decoration:none;font-size:15px;font-weight:500;color:var(--ink-soft);
+    position:relative;padding:4px 0;transition:color .14s ease;
+  }
+  nav.main a:hover{color:var(--cairn)}
+  nav.main a::after{
+    content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--cairn-bright);transition:right .2s ease;
+  }
+  nav.main a:hover::after{right:0}
+  .header-cta{display:none}
+  @media (min-width:880px){
+    nav.main{display:flex}
+    .header-cta{display:inline-flex}
+  }
+
+  /* ---- guides hero ---- */
+  .g-hero{padding:64px 0 8px}
+  .g-hero h1{font-size:clamp(38px,6.4vw,60px);margin-top:12px}
+  .g-hero .lead{margin-top:18px;font-size:clamp(17px,2.3vw,20px);color:var(--ink-soft);max-width:52ch}
+
+  /* ---- guides grid ---- */
+  .g-grid{
+    margin:44px 0 88px;display:grid;gap:22px;grid-template-columns:1fr;
+  }
+  @media (min-width:880px){.g-grid{grid-template-columns:repeat(3,1fr)}}
+
+  .g-card{
+    display:flex;flex-direction:column;text-decoration:none;
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;
+    transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;
+  }
+  .g-card:hover{transform:translateY(-3px);box-shadow:0 18px 36px -22px rgba(10,79,51,.4);border-color:rgba(10,79,51,.25)}
+  @media (prefers-reduced-motion:reduce){.g-card:hover{transform:none}}
+  .g-card:focus-visible{outline:3px solid var(--cairn-bright);outline-offset:3px}
+  .g-card img{
+    display:block;width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;
+    border-bottom:1px solid var(--line);background:var(--paper-2);
+  }
+  .g-card .g-body{padding:22px 22px 26px;display:flex;flex-direction:column;gap:8px}
+  .g-card h3{font-size:21px;line-height:1.2}
+  .g-card p{color:var(--ink-soft);font-size:15.5px}
+
+  /* ---- footer ---- */
+  footer{background:var(--ink);color:rgba(255,255,255,.7);padding:48px 0 40px}
+  .foot-top{display:flex;flex-direction:column;gap:24px}
+  .foot-brand .wordmark{color:#fff}
+  .foot-brand .wordmark b{color:#7fd3a8}
+  .foot-tag{font-size:14.5px;margin-top:12px;max-width:34ch}
+  .foot-nav{display:flex;flex-wrap:wrap;gap:22px}
+  .foot-nav a{text-decoration:none;color:rgba(255,255,255,.72);font-size:14.5px;transition:color .14s ease}
+  .foot-nav a:hover{color:#fff}
+  .foot-bottom{
+    margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);
+    font-size:13.5px;color:rgba(255,255,255,.5);display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;
+  }
+  @media (min-width:760px){
+    .foot-top{flex-direction:row;justify-content:space-between;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap hbar">
+    <a class="brand" href="/" aria-label="Cairnsite home">
+      <!-- LOGO: stacked cairn + spark -->
+      <svg width="30" height="38" viewBox="0 0 30 38" fill="none" aria-hidden="true" focusable="false">
+        <g fill="var(--cairn)">
+          <path d="M15 0.5c.4 2 .9 2.6 2.7 3-1.8.4-2.3 1-2.7 3-.4-2-.9-2.6-2.7-3 1.8-.4 2.3-1 2.7-3z"/>
+          <rect x="6" y="9" width="18" height="7" rx="3.5"/>
+          <rect x="3.5" y="18" width="23" height="7.5" rx="3.75"/>
+          <rect x="7.5" y="27.5" width="15" height="7" rx="3.5"/>
+        </g>
+      </svg>
+      <span class="wordmark"><b>Cairn</b>site</span>
+    </a>
+
+    <nav class="main" aria-label="Primary">
+      <a href="/#how">How it works</a>
+      <a href="/#included">What's included</a>
+      <a href="/guides/">Guides</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+
+    <a class="btn btn-wa header-cta" href="https://wa.me/94704164060" aria-label="Message Cairnsite on WhatsApp">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43l-.48-.01c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.16 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+      WhatsApp us
+    </a>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <!-- ============ GUIDES HERO ============ -->
+  <section class="g-hero">
+    <p class="eyebrow">Guides</p>
+    <h1>Guides</h1>
+    <p class="lead">Practical, plain-English guides to getting your local business online.</p>
+  </section>
+
+  <!-- ============ GUIDES GRID ============ -->
+  <section aria-label="All guides">
+    <div class="g-grid">
+
+      <a class="g-card" href="why-your-small-business-needs-a-website.html">
+        <img src="assets/why-your-small-business-needs-a-website.png" alt="Why your small business needs a website" width="1200" height="630" loading="lazy" decoding="async">
+        <span class="g-body">
+          <h3>Why your small business needs a website</h3>
+          <p>Even with social media, here's why a simple site helps you get found and earn trust.</p>
+        </span>
+      </a>
+
+      <a class="g-card" href="website-vs-social-media.html">
+        <img src="assets/website-vs-social-media.png" alt="Website vs social media" width="1200" height="630" loading="lazy" decoding="async">
+        <span class="g-body">
+          <h3>Do you need a website if you have Facebook or Instagram?</h3>
+          <p>The honest answer — and how a website and social media work best together.</p>
+        </span>
+      </a>
+
+      <a class="g-card" href="how-to-get-your-business-online.html">
+        <img src="assets/how-to-get-your-business-online.png" alt="How to get your business online" width="1200" height="630" loading="lazy" decoding="async">
+        <span class="g-body">
+          <h3>How to get your business online (without the tech headache)</h3>
+          <p>A simple, plain-English path to getting a real website live.</p>
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="/" aria-label="Cairnsite home">
+          <svg width="28" height="36" viewBox="0 0 30 38" fill="none" aria-hidden="true" focusable="false">
+            <g fill="#7fd3a8">
+              <path d="M15 0.5c.4 2 .9 2.6 2.7 3-1.8.4-2.3 1-2.7 3-.4-2-.9-2.6-2.7-3 1.8-.4 2.3-1 2.7-3z"/>
+              <rect x="6" y="9" width="18" height="7" rx="3.5"/>
+              <rect x="3.5" y="18" width="23" height="7.5" rx="3.75"/>
+              <rect x="7.5" y="27.5" width="15" height="7" rx="3.5"/>
+            </g>
+          </svg>
+          <span class="wordmark"><b>Cairn</b>site</span>
+        </a>
+        <p class="foot-tag">A landmark online for local businesses that don't have one yet.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="/#how">How it works</a>
+        <a href="/#included">What's included</a>
+        <a href="/guides/">Guides</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://wa.me/94704164060">WhatsApp</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Cairnsite</span>
+      <span>Built fast by humans + AI.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
