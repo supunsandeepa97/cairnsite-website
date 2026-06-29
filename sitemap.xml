@@ -13,6 +13,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://cairnsite.vercel.app/pulse/</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://cairnsite.vercel.app/guides/why-your-small-business-needs-a-website.html</loc>
     <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
