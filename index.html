@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cairnsite — Real websites for local businesses</title>
+<meta name="description" content="Cairnsite designs a real, working sample of your website — free to see. Love it? We make it live on your own domain and host and maintain it for you. Built fast by humans and AI.">
+<link rel="icon" href="assets/favicon.png">
+<meta property="og:title" content="Cairnsite — Real websites for local businesses">
+<meta property="og:description" content="We design a real, working sample of your site — free to see. Love it? We make it live and host it for you.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/og-image.png">
+<style>
+  :root{
+    --cairn:#0A4F33;
+    --cairn-bright:#0F7A4D;
+    --ink:#15201A;
+    --paper:#F5F7F4;
+    --wa:#25D366;
+    /* derived */
+    --stone:#C9B79C;        /* warm sand stone */
+    --stone-dk:#A8916F;
+    --line:rgba(21,32,26,.12);
+    --paper-2:#ECEFEA;
+    --ink-soft:#46524A;
+    --emerald-tint:#E4EDE7;
+    --maxw:1180px;
+    --serif:Georgia,"Times New Roman","Iowan Old Style",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --radius:16px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--ink);margin:0;letter-spacing:-.01em;line-height:1.06}
+  p{margin:0}
+  a{color:inherit}
+  img,svg{max-width:100%}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--cairn-bright);font-family:var(--sans);
+  }
+
+  /* ---- skip link ---- */
+  .skip{
+    position:absolute;left:12px;top:-60px;background:var(--cairn);color:#fff;
+    padding:10px 16px;border-radius:10px;z-index:200;transition:top .15s ease;text-decoration:none;font-weight:600;
+  }
+  .skip:focus{top:12px}
+
+  /* ---- focus visibility ---- */
+  a:focus-visible,button:focus-visible{
+    outline:3px solid var(--cairn-bright);outline-offset:3px;border-radius:6px;
+  }
+
+  /* ---- buttons ---- */
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--sans);font-weight:600;font-size:15px;line-height:1;
+    padding:14px 22px;border-radius:999px;text-decoration:none;border:1.5px solid transparent;
+    cursor:pointer;transition:transform .14s ease,background .14s ease,box-shadow .14s ease,border-color .14s ease;
+  }
+  .btn svg{flex:0 0 auto}
+  .btn-wa{background:var(--wa);color:#06351c;box-shadow:0 8px 22px rgba(37,211,102,.32)}
+  .btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(37,211,102,.4)}
+  .btn-ghost{background:transparent;color:var(--cairn);border-color:rgba(10,79,51,.32)}
+  .btn-ghost:hover{border-color:var(--cairn);background:rgba(10,79,51,.05)}
+  .btn-lg{padding:17px 28px;font-size:16px}
+  @media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+
+  /* ---- header ---- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(245,247,244,.78);
+    backdrop-filter:saturate(150%) blur(14px);
+    -webkit-backdrop-filter:saturate(150%) blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .hbar{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none}
+  .wordmark{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--ink);letter-spacing:-.015em}
+  .wordmark b{color:var(--cairn)}
+  nav.main{display:none;gap:30px;align-items:center}
+  nav.main a{
+    text-decoration:none;font-size:15px;font-weight:500;color:var(--ink-soft);
+    position:relative;padding:4px 0;transition:color .14s ease;
+  }
+  nav.main a:hover{color:var(--cairn)}
+  nav.main a::after{
+    content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--cairn-bright);transition:right .2s ease;
+  }
+  nav.main a:hover::after{right:0}
+  .header-cta{display:none}
+  @media (min-width:880px){
+    nav.main{display:flex}
+    .header-cta{display:inline-flex}
+  }
+
+  /* ---- hero ---- */
+  .hero{padding:72px 0 78px}
+  .hero-grid{display:grid;gap:44px;align-items:center}
+  .hero h1{font-size:clamp(40px,7.2vw,68px);max-width:13ch}
+  .hero .lead{margin-top:22px;font-size:clamp(17px,2.3vw,21px);color:var(--ink-soft);max-width:46ch}
+  .hero-actions{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px}
+  .reassure{margin-top:20px;font-size:14px;color:var(--ink-soft);display:flex;align-items:center;gap:8px}
+  .reassure svg{color:var(--cairn-bright);flex:0 0 auto}
+
+  /* hero art panel */
+  .hero-art{
+    position:relative;background:var(--cairn);border-radius:24px;overflow:hidden;
+    min-height:380px;display:flex;align-items:flex-end;justify-content:center;
+    box-shadow:0 30px 60px -28px rgba(10,79,51,.55);
+  }
+  .hero-art .label{
+    position:absolute;top:22px;left:24px;color:rgba(255,255,255,.62);
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  }
+  .hero-art svg.cairn-art{width:78%;max-width:300px;display:block}
+  /* faint topographic rings behind the cairn */
+  .topo{position:absolute;inset:0;opacity:.5}
+  @media (min-width:880px){
+    .hero-grid{grid-template-columns:1.05fr .95fr}
+    .hero{padding:96px 0 104px}
+  }
+
+  .spark{transform-origin:center;animation:glint 3.6s ease-in-out infinite}
+  @keyframes glint{0%,100%{opacity:.55;transform:scale(.9)}50%{opacity:1;transform:scale(1.12)}}
+  @media (prefers-reduced-motion:reduce){.spark{animation:none;opacity:1}}
+
+  /* ---- section scaffolding ---- */
+  section{position:relative}
+  .sec-head{max-width:60ch}
+  .sec-head h2{font-size:clamp(28px,4.6vw,42px);margin-top:12px}
+  .sec-head p{margin-top:14px;color:var(--ink-soft);font-size:18px}
+
+  /* ---- process / the trail ---- */
+  .process{padding:84px 0;border-top:1px solid var(--line)}
+  .trail{margin-top:54px;position:relative}
+  .step{
+    position:relative;display:grid;grid-template-columns:auto 1fr;gap:22px;
+    padding:0 0 40px 0;align-items:start;
+  }
+  .step:last-child{padding-bottom:0}
+  /* the connecting trail line */
+  .knob{position:relative;display:flex;justify-content:center;width:56px}
+  .knob .dot{
+    width:54px;height:54px;border-radius:50%;background:var(--emerald-tint);
+    border:2px solid var(--cairn);display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:19px;font-weight:600;color:var(--cairn);z-index:2;
+  }
+  .step:not(:last-child) .knob::after{
+    content:"";position:absolute;top:54px;bottom:-40px;left:50%;width:2px;
+    background:linear-gradient(var(--cairn) 40%,rgba(10,79,51,.18));transform:translateX(-50%);
+  }
+  .step-body{padding-top:6px}
+  .step-body h3{font-size:23px}
+  .step-body p{margin-top:7px;color:var(--ink-soft);max-width:54ch}
+  .step-body .note{font-size:14.5px;color:var(--cairn-bright);font-weight:600;margin-top:8px}
+  @media (min-width:880px){
+    .step{grid-template-columns:auto 1fr;gap:32px;padding-bottom:46px}
+    .step:not(:last-child) .knob::after{bottom:-46px}
+  }
+
+  /* ---- included cards ---- */
+  .included{padding:84px 0;background:var(--paper-2);border-top:1px solid var(--line)}
+  .cards{margin-top:50px;display:grid;gap:18px;grid-template-columns:1fr}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 18px 36px -22px rgba(10,79,51,.4);border-color:rgba(10,79,51,.25)}
+  @media (prefers-reduced-motion:reduce){.card:hover{transform:none}}
+  .card .ico{
+    width:46px;height:46px;border-radius:12px;background:var(--emerald-tint);
+    display:flex;align-items:center;justify-content:center;color:var(--cairn);margin-bottom:16px;
+  }
+  .card h3{font-size:20px}
+  .card p{margin-top:8px;color:var(--ink-soft);font-size:15.5px}
+  @media (min-width:880px){.cards{grid-template-columns:repeat(3,1fr)}}
+
+  /* ---- CTA band ---- */
+  .band{background:var(--cairn);color:#fff;padding:74px 0;text-align:center;position:relative;overflow:hidden}
+  .band h2{color:#fff;font-size:clamp(28px,4.6vw,44px);max-width:18ch;margin:0 auto}
+  .band p{color:rgba(255,255,255,.78);margin-top:14px;font-size:18px}
+  .band .btn-row{margin-top:30px;display:flex;justify-content:center}
+  .band .topo{opacity:.4}
+
+  /* ---- contact ---- */
+  .contact{padding:88px 0;border-top:1px solid var(--line)}
+  .contact-grid{display:grid;gap:42px;margin-top:34px}
+  .actions{display:flex;flex-direction:column;gap:14px}
+  .action{
+    display:flex;align-items:center;gap:16px;text-decoration:none;
+    background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;
+    transition:border-color .14s ease,transform .14s ease,box-shadow .14s ease;
+  }
+  .action:hover{border-color:rgba(10,79,51,.3);transform:translateX(3px);box-shadow:0 12px 26px -20px rgba(10,79,51,.5)}
+  @media (prefers-reduced-motion:reduce){.action:hover{transform:none}}
+  .action .ai{
+    width:46px;height:46px;border-radius:11px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  }
+  .ai.wa{background:rgba(37,211,102,.16);color:#0c7a3e}
+  .ai.tel{background:var(--emerald-tint);color:var(--cairn)}
+  .ai.mail{background:var(--emerald-tint);color:var(--cairn)}
+  .action .at small{display:block;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+  .action .at span{display:block;font-size:18px;font-weight:600;color:var(--ink);margin-top:2px}
+  .founder{
+    font-size:15px;color:var(--ink-soft);margin-top:26px;padding-top:22px;border-top:1px dashed var(--line);
+  }
+  .founder b{color:var(--ink)}
+  @media (min-width:880px){
+    .contact-grid{grid-template-columns:1fr 1fr;align-items:start}
+  }
+
+  /* ---- footer ---- */
+  footer{background:var(--ink);color:rgba(255,255,255,.7);padding:48px 0 40px}
+  .foot-top{display:flex;flex-direction:column;gap:24px}
+  .foot-brand .wordmark{color:#fff}
+  .foot-brand .wordmark b{color:#7fd3a8}
+  .foot-tag{font-size:14.5px;margin-top:12px;max-width:34ch}
+  .foot-nav{display:flex;flex-wrap:wrap;gap:22px}
+  .foot-nav a{text-decoration:none;color:rgba(255,255,255,.72);font-size:14.5px;transition:color .14s ease}
+  .foot-nav a:hover{color:#fff}
+  .foot-bottom{
+    margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);
+    font-size:13.5px;color:rgba(255,255,255,.5);display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;
+  }
+  @media (min-width:760px){
+    .foot-top{flex-direction:row;justify-content:space-between;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap hbar">
+    <a class="brand" href="#top" aria-label="Cairnsite home">
+      <!-- LOGO: stacked cairn + spark -->
+      <svg width="30" height="38" viewBox="0 0 30 38" fill="none" aria-hidden="true" focusable="false">
+        <g fill="var(--cairn)">
+          <path class="spark" d="M15 0.5c.4 2 .9 2.6 2.7 3-1.8.4-2.3 1-2.7 3-.4-2-.9-2.6-2.7-3 1.8-.4 2.3-1 2.7-3z"/>
+          <rect x="6" y="9" width="18" height="7" rx="3.5"/>
+          <rect x="3.5" y="18" width="23" height="7.5" rx="3.75"/>
+          <rect x="7.5" y="27.5" width="15" height="7" rx="3.5"/>
+        </g>
+      </svg>
+      <span class="wordmark"><b>Cairn</b>site</span>
+    </a>
+
+    <nav class="main" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#included">What's included</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a class="btn btn-wa header-cta" href="https://wa.me/94704164060" aria-label="Message Cairnsite on WhatsApp">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43l-.48-.01c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.16 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+      WhatsApp us
+    </a>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Found &nbsp;·&nbsp; Built &nbsp;·&nbsp; Live</p>
+      <h1>Real websites for local businesses.</h1>
+      <p class="lead">We design a real, working sample of your site — free to see. Love it? We make it live and host it for you.</p>
+      <div class="hero-actions">
+        <a class="btn btn-wa btn-lg" href="https://wa.me/94704164060">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43l-.48-.01c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.16 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+          Message us on WhatsApp
+        </a>
+        <a class="btn btn-ghost btn-lg" href="#how">How it works</a>
+      </div>
+      <p class="reassure">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Nothing to commit to. You only go live if you love it.
+      </p>
+    </div>
+
+    <div class="hero-art" role="img" aria-label="Illustration of a cairn — a stack of smooth stones with a small spark above the top stone, the Cairnsite mark.">
+      <span class="label">A landmark for getting found</span>
+      <!-- topographic backdrop -->
+      <svg class="topo" viewBox="0 0 400 400" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g stroke="rgba(255,255,255,.10)" stroke-width="1.4" fill="none">
+          <path d="M-20 320 Q120 250 200 290 T420 250"/>
+          <path d="M-20 350 Q120 285 200 320 T420 285"/>
+          <path d="M-20 380 Q120 320 200 350 T420 320"/>
+          <ellipse cx="200" cy="180" rx="150" ry="150"/>
+          <ellipse cx="200" cy="180" rx="110" ry="110"/>
+          <ellipse cx="200" cy="180" rx="70" ry="70"/>
+        </g>
+      </svg>
+      <!-- big cairn -->
+      <svg class="cairn-art" viewBox="0 0 200 260" fill="none" aria-hidden="true">
+        <g fill="#F5F7F4">
+          <path class="spark" d="M100 8c1.6 8 3.2 10 10.5 11.8-7.3 1.8-8.9 3.8-10.5 11.8-1.6-8-3.2-10-10.5-11.8C96.8 18 98.4 16 100 8z" fill="var(--stone)"/>
+        </g>
+        <!-- stones, warm stone tones -->
+        <ellipse cx="100" cy="70" rx="42" ry="22" fill="var(--stone)"/>
+        <ellipse cx="100" cy="65" rx="42" ry="20" fill="#DCCCB2"/>
+        <ellipse cx="100" cy="122" rx="60" ry="28" fill="var(--stone-dk)"/>
+        <ellipse cx="100" cy="116" rx="60" ry="26" fill="var(--stone)"/>
+        <ellipse cx="100" cy="184" rx="50" ry="26" fill="var(--stone-dk)"/>
+        <ellipse cx="100" cy="178" rx="50" ry="24" fill="#D3BFA1"/>
+        <ellipse cx="100" cy="234" rx="68" ry="24" fill="rgba(0,0,0,.18)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="process" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">How it works</p>
+      <h2>Five steps, in order — like stones on a trail.</h2>
+      <p>Each stage builds on the last. You never pay attention to a thing until there's something real in front of you.</p>
+    </div>
+
+    <ol class="trail" style="list-style:none;margin:0;padding:0">
+      <li class="step">
+        <div class="knob"><span class="dot">01</span></div>
+        <div class="step-body">
+          <h3>We find you</h3>
+          <p>We look for a local business that does great work but has no website — and decide you're worth building for.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="knob"><span class="dot">02</span></div>
+        <div class="step-body">
+          <h3>We build a real sample</h3>
+          <p>Not a mockup. A genuine, working site for your business — pages, copy, and layout — built fast by humans and AI.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="knob"><span class="dot">03</span></div>
+        <div class="step-body">
+          <h3>We show you</h3>
+          <p>First a few screenshots, so you can see it at a glance. Then a live link you can click through and try yourself.</p>
+          <p class="note">Screenshots first, then a working link.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="knob"><span class="dot">04</span></div>
+        <div class="step-body">
+          <h3>You decide</h3>
+          <p>No pressure either way. If it isn't right for you, that's fine. If you love it, we move to the last step.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="knob"><span class="dot">05</span></div>
+        <div class="step-body">
+          <h3>We host &amp; maintain it</h3>
+          <p>We put it live on your own domain, keep it running, and look after updates — so you can get back to your business.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ WHAT'S INCLUDED ============ -->
+<section class="included" id="included">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Why Cairnsite</p>
+      <h2>What's included with every site.</h2>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <span class="ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8M12 18v3"/></svg>
+        </span>
+        <h3>A real working website</h3>
+        <p>Built and clickable from day one — not a mockup or a static picture of a site.</p>
+      </article>
+      <article class="card">
+        <span class="ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>
+        </span>
+        <h3>Mobile-friendly by default</h3>
+        <p>Looks right on the phone in your customer's hand, not only on a desktop screen.</p>
+      </article>
+      <article class="card">
+        <span class="ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16a4 4 0 0 1 .9-7.9 5.5 5.5 0 0 1 10.6-1.6A4.5 4.5 0 0 1 18 16Z"/><path d="M12 13v6m0-6-2.5 2.5M12 13l2.5 2.5"/></svg>
+        </span>
+        <h3>Fully hosted &amp; maintained</h3>
+        <p>We keep it online on your own domain and handle the updates for you.</p>
+      </article>
+      <article class="card">
+        <span class="ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+        </span>
+        <h3>Built fast by humans + AI</h3>
+        <p>Real people guide the work; AI helps us move quickly — so you see something soon.</p>
+      </article>
+      <article class="card">
+        <span class="ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.3-.6L3 21l1.3-4A8.2 8.2 0 0 1 3.5 11 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5z"/></svg>
+        </span>
+        <h3>Talk to a real person</h3>
+        <p>Reach a human on WhatsApp — ask anything, no forms, no phone menus.</p>
+      </article>
+      <article class="card">
+        <span class="ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.7-7-10a7 7 0 0 1 14 0c0 5.3-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg>
+        </span>
+        <h3>Made to get you found</h3>
+        <p>A clear landmark online — so the customers already looking for you can land on you.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="band">
+  <svg class="topo" viewBox="0 0 1200 320" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="rgba(255,255,255,.10)" stroke-width="1.4" fill="none">
+      <path d="M-20 260 Q300 180 600 230 T1220 190"/>
+      <path d="M-20 290 Q300 215 600 260 T1220 220"/>
+      <ellipse cx="600" cy="120" rx="380" ry="200"/>
+      <ellipse cx="600" cy="120" rx="260" ry="140"/>
+    </g>
+  </svg>
+  <div class="wrap" style="position:relative">
+    <h2>See what we'd build for your business — free.</h2>
+    <p>One message is all it takes to start.</p>
+    <div class="btn-row">
+      <a class="btn btn-wa btn-lg" href="https://wa.me/94704164060">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43l-.48-.01c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.16 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+        Message us on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Contact</p>
+      <h2>Let's talk about your site.</h2>
+      <p>The fastest way to reach us is WhatsApp — you'll get a real person, not a form.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="actions">
+        <a class="action" href="https://wa.me/94704164060">
+          <span class="ai wa" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43l-.48-.01c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.16 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+          </span>
+          <span class="at"><small>WhatsApp — fastest</small><span>+94 70 416 4060</span></span>
+        </a>
+        <a class="action" href="tel:+94704164060">
+          <span class="ai tel" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z"/></svg>
+          </span>
+          <span class="at"><small>Call</small><span>+94 70 416 4060</span></span>
+        </a>
+        <a class="action" href="mailto:finance.nfm@ncg.lk">
+          <span class="ai mail" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          </span>
+          <span class="at"><small>Email</small><span>finance.nfm@ncg.lk</span></span>
+        </a>
+      </div>
+
+      <div>
+        <div class="hero-art" style="min-height:200px;border-radius:18px">
+          <svg class="cairn-art" style="max-width:150px;width:55%" viewBox="0 0 200 260" fill="none" aria-hidden="true">
+            <path class="spark" d="M100 8c1.6 8 3.2 10 10.5 11.8-7.3 1.8-8.9 3.8-10.5 11.8-1.6-8-3.2-10-10.5-11.8C96.8 18 98.4 16 100 8z" fill="var(--stone)"/>
+            <ellipse cx="100" cy="70" rx="42" ry="20" fill="#DCCCB2"/>
+            <ellipse cx="100" cy="120" rx="60" ry="26" fill="var(--stone)"/>
+            <ellipse cx="100" cy="180" rx="50" ry="24" fill="#D3BFA1"/>
+            <ellipse cx="100" cy="232" rx="66" ry="22" fill="rgba(0,0,0,.18)"/>
+          </svg>
+        </div>
+        <p class="founder">Founded and run by <b>Supun Sandeepa</b>. When you message us, you're talking straight to the person building your site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="#top" aria-label="Cairnsite home">
+          <svg width="28" height="36" viewBox="0 0 30 38" fill="none" aria-hidden="true" focusable="false">
+            <g fill="#7fd3a8">
+              <path d="M15 0.5c.4 2 .9 2.6 2.7 3-1.8.4-2.3 1-2.7 3-.4-2-.9-2.6-2.7-3 1.8-.4 2.3-1 2.7-3z"/>
+              <rect x="6" y="9" width="18" height="7" rx="3.5"/>
+              <rect x="3.5" y="18" width="23" height="7.5" rx="3.75"/>
+              <rect x="7.5" y="27.5" width="15" height="7" rx="3.5"/>
+            </g>
+          </svg>
+          <span class="wordmark"><b>Cairn</b>site</span>
+        </a>
+        <p class="foot-tag">A landmark online for local businesses that don't have one yet.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="#how">How it works</a>
+        <a href="#included">What's included</a>
+        <a href="#contact">Contact</a>
+        <a href="https://wa.me/94704164060">WhatsApp</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Cairnsite</span>
+      <span>Built fast by humans + AI.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
