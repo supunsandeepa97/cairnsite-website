@@ -312,7 +312,22 @@
   .hero{background:transparent}
   .hero-scrim{background:linear-gradient(90deg, rgba(6,10,8,.72) 0%, rgba(6,10,8,.3) 42%, rgba(6,10,8,0) 72%)}
 
-  .process,.included,.audience,.faq,.guides-teaser,.contact{background:transparent;border-top-color:rgba(255,255,255,.08)}
+  .process,.included,.audience,.faq,.guides-teaser,.contact{background:rgba(8,12,10,.34);border-top-color:rgba(255,255,255,.08)}
+  .hero h1{letter-spacing:-.035em}
+
+  /* signature: "The Trail" wayfinding rail */
+  .trail-rail{position:fixed;right:28px;top:50%;transform:translateY(-50%);z-index:40;display:none;flex-direction:column;align-items:center;gap:24px}
+  .trail-rail::before{content:"";position:absolute;top:5px;bottom:5px;left:50%;transform:translateX(-50%);width:2px;background:rgba(255,255,255,.13);border-radius:2px}
+  .trail-rail .tfill{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:2px;height:0;background:#8FBFA3;border-radius:2px;transition:height .35s cubic-bezier(.16,1,.3,1)}
+  .trail-rail a{position:relative;z-index:1;display:block;line-height:0}
+  .trail-rail .wp{display:block;width:11px;height:11px;border-radius:50%;border:2px solid rgba(255,255,255,.32);background:#0a120e;transition:border-color .2s ease,background .2s ease,transform .2s ease}
+  .trail-rail a:hover .wp{border-color:#8FBFA3}
+  .trail-rail a.active .wp{border-color:#8FBFA3;background:#8FBFA3;transform:scale(1.18)}
+  .trail-rail em{position:absolute;right:22px;top:50%;transform:translateY(-50%) translateX(6px);font-style:normal;font-size:12px;letter-spacing:.02em;color:#aab3ab;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+  .trail-rail a:hover em,.trail-rail a.active em{opacity:1;transform:translateY(-50%);color:#E7EAE7}
+  .trail-rail a:focus-visible .wp{outline:2px solid #8FBFA3;outline-offset:3px}
+  @media (min-width:980px){.trail-rail{display:flex}}
+  @media (prefers-reduced-motion:reduce){.trail-rail .tfill,.trail-rail .wp,.trail-rail em{transition:none}}
   .sec-head h2{color:#EFF1EE} .sec-head .lead,.audience .sub,.reassure{color:#aab3ab}
   .eyebrow{color:#8FBFA3} .eyebrow::before{background:#6FA386}
 
@@ -662,6 +677,15 @@
     </div>
   </div>
 </section>
+<!-- Signature: "The Trail" — page sections as stone waypoints on a wayfinding trail -->
+<nav class="trail-rail" aria-label="Jump to section">
+  <span class="tfill" aria-hidden="true"></span>
+  <a href="#how"><span class="wp"></span><em>How it works</em></a>
+  <a href="#included"><span class="wp"></span><em>What's included</em></a>
+  <a href="#who-we-help"><span class="wp"></span><em>Who we build for</em></a>
+  <a href="#guides"><span class="wp"></span><em>Guides</em></a>
+  <a href="#contact"><span class="wp"></span><em>Contact</em></a>
+</nav>
 </main>
 
 <!-- ============ FOOTER ============ -->
@@ -763,6 +787,25 @@
     }).catch(function(){ /* SVG stays */ });
   };
   ('requestIdleCallback' in window) ? requestIdleCallback(boot,{timeout:1800}) : window.addEventListener('load', function(){ setTimeout(boot,200); }, {once:true});
+})();
+</script>
+<script>
+/* "The Trail" — active waypoint via section observer + scroll-progress fill + smooth jump */
+(function(){
+  var rail = document.querySelector('.trail-rail'); if(!rail) return;
+  var links = Array.prototype.slice.call(rail.querySelectorAll('a'));
+  var fill = rail.querySelector('.tfill');
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ var i=secs.indexOf(e.target);
+        if(i>-1){ links.forEach(function(l){ l.classList.remove('active'); }); links[i].classList.add('active'); } } });
+    }, {rootMargin:'-45% 0px -45% 0px', threshold:0});
+    secs.forEach(function(s){ if(s) io.observe(s); });
+  }
+  function onScroll(){ var max=document.documentElement.scrollHeight-window.innerHeight; var p=max>0?(window.scrollY||window.pageYOffset)/max:0; if(fill) fill.style.height=Math.max(0,Math.min(1,p))*100+'%'; }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  links.forEach(function(a){ a.addEventListener('click', function(ev){ var t=document.querySelector(a.getAttribute('href')); if(t){ ev.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); } }); });
 })();
 </script>
 </body>
