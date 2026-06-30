@@ -17,6 +17,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<!-- 3D hero (Three.js r185, deferred + capability-gated; importmap must precede module scripts) -->
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.185.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.185.0/examples/jsm/"}}
+</script>
+
 <!-- Open Graph -->
 <meta property="og:title" content="Cairnsite — Websites for local businesses">
 <meta property="og:description" content="We design a real, working sample of your site — free to see. Love it? We make it live, host it and maintain it for you.">
@@ -139,6 +144,12 @@
   @keyframes glint{0%,100%{opacity:.6;transform:scale(.92)}50%{opacity:1;transform:scale(1.14)}}
   @media (prefers-reduced-motion:reduce){.spark{animation:none;opacity:1}}
 
+  /* 3D cairn canvas overlay (crossfades in once WebGL is ready; SVG is the instant LCP) */
+  .hero-art .cairn-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .8s ease;z-index:1}
+  .hero-art.cairn-3d-ready .cairn-canvas{opacity:1}
+  .hero-art.cairn-3d-ready .cairn-art{opacity:0}
+  .hero-art .label{z-index:4}
+
   /* section scaffolding */
   section{position:relative;scroll-margin-top:86px}
   .sec-head{max-width:60ch}
@@ -240,6 +251,11 @@
   .foot-nav a:hover{color:#fff}
   .foot-bottom{margin-top:36px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);font-size:13.5px;color:rgba(255,255,255,.5);display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;position:relative}
   @media (min-width:760px){.foot-top{flex-direction:row;justify-content:space-between;align-items:flex-start}}
+
+  /* ---- scroll reveal (JS-driven progressive enhancement; graceful without JS) ---- */
+  .anim{opacity:0;transform:translateY(22px);transition:opacity .6s ease-out,transform .6s ease-out;will-change:opacity,transform}
+  .anim.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.anim,.anim.in{opacity:1!important;transform:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -298,7 +314,7 @@
       </p>
     </div>
 
-    <div class="hero-art" role="img" aria-label="Illustration of a cairn — a stack of smooth stones with a small spark above the top stone, the Cairnsite mark.">
+    <div class="hero-art" id="cairnStage" role="img" aria-label="Illustration of a cairn — a stack of smooth stones with a small spark above the top stone, the Cairnsite mark.">
       <span class="label">A landmark for getting found</span>
       <svg class="topo" viewBox="0 0 400 400" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <g stroke="rgba(255,255,255,.10)" stroke-width="1.4" fill="none">
@@ -619,5 +635,47 @@
   </div>
 </footer>
 
+<script>
+/* Scroll-reveal: progressive enhancement, library-free. Animates transform/opacity
+   only (no layout shift); fully skipped under reduced-motion or without IO support. */
+(function(){
+  if((window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) || !('IntersectionObserver' in window)) return;
+  var sel = '.process .sec-head,.trail .step,.included .sec-head,.cards .card,'
+          + '.audience .eyebrow,.audience h2,.audience .sub,.audience .tags span,'
+          + '.faq .sec-head,.faq details,.guides-teaser .sec-head,.gt-grid .gt-card,'
+          + '.contact .sec-head,.actions .action,.band h2,.band p,.band .btn-row';
+  var els = Array.prototype.slice.call(document.querySelectorAll(sel));
+  els.forEach(function(el){ el.classList.add('anim'); });
+  document.querySelectorAll('.cards,.gt-grid,.trail,.audience .tags,.actions').forEach(function(g){
+    Array.prototype.forEach.call(g.children, function(ch,i){
+      if(ch.classList.contains('anim')) ch.style.transitionDelay = (Math.min(i,8)*55) + 'ms';
+    });
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+<script type="module">
+/* Deferred, capability-gated 3D hero boot. SVG stays as the instant hero;
+   Three.js loads only after window.load → idle, and only on capable devices. */
+(function(){
+  var stage = document.getElementById('cairnStage');
+  if(!stage) return;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tooSmall = matchMedia('(max-width: 700px)').matches;
+  function webglOK(){ try{ var c=document.createElement('canvas'); return !!(window.WebGLRenderingContext && (c.getContext('webgl2')||c.getContext('webgl'))); }catch(e){ return false; } }
+  if(reduce || tooSmall || !webglOK()) return;           // keep the SVG; download nothing
+  var boot = function(){
+    import('/assets/cairn.js').then(function(m){
+      var inst = m.mountCairn(stage);
+      window.addEventListener('pagehide', function(){ inst && inst.destroy && inst.destroy(); }, {once:true});
+    }).catch(function(){ /* SVG stays — silent */ });
+  };
+  var defer = function(){ ('requestIdleCallback' in window) ? requestIdleCallback(boot,{timeout:2500}) : setTimeout(boot,200); };
+  (document.readyState === 'complete') ? defer() : window.addEventListener('load', defer, {once:true});
+})();
+</script>
 </body>
 </html>
