@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Portal — Cairnsite</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0A4F33">
+<link rel="icon" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/logo.png">
+<style>
+  :root{
+    --cairn:#0A4F33; --cairn-bright:#0F7A4D; --ink:#15201A; --paper:#F5F7F4;
+    --wa:#25D366; --line:rgba(21,32,26,.12); --paper-2:#ECEFEA; --ink-soft:#46524A;
+    --emerald-tint:#E4EDE7; --card:#FFFFFF;
+    --good:#0F7A4D; --good-tint:#E4EDE7; --warn:#9A6700; --warn-tint:#FBF1D6;
+    --maxw:1080px;
+    --serif:Georgia,"Times New Roman","Iowan Old Style",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --radius:16px;
+    --shadow:0 1px 2px rgba(21,32,26,.04),0 8px 24px rgba(21,32,26,.06);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;margin:0;line-height:1.1}
+  p{margin:0}
+  a{color:var(--cairn)}
+  .num{font-variant-numeric:tabular-nums}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+  .eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cairn-bright)}
+  .hidden{display:none!important}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--sans);
+    font-weight:600;font-size:15px;line-height:1;padding:13px 20px;border-radius:999px;text-decoration:none;
+    border:1.5px solid transparent;cursor:pointer;transition:transform .14s,background .14s,box-shadow .14s,border-color .14s}
+  .btn:disabled{opacity:.55;cursor:default}
+  .btn-primary{background:var(--cairn);color:#fff}
+  .btn-primary:hover:not(:disabled){background:var(--cairn-bright);transform:translateY(-1px)}
+  .btn-wa{background:var(--wa);color:#06351c;box-shadow:0 6px 18px rgba(37,211,102,.3)}
+  .btn-wa:hover{transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--cairn);border-color:rgba(10,79,51,.3)}
+  .btn-ghost:hover{border-color:var(--cairn);background:rgba(10,79,51,.05)}
+  .btn-block{width:100%}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--cairn-bright);outline-offset:2px}
+
+  /* logo */
+  .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none}
+  .wordmark{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink);letter-spacing:-.015em}
+  .wordmark b{color:var(--cairn)}
+
+  /* ---------- AUTH (login / set password) ---------- */
+  .auth-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .auth-card{width:100%;max-width:400px;background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);box-shadow:var(--shadow);padding:36px 30px}
+  .auth-card .brand{margin-bottom:22px}
+  .auth-card h1{font-size:25px;margin-bottom:6px}
+  .auth-card .sub{color:var(--ink-soft);font-size:14.5px;margin-bottom:24px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:6px}
+  .field input{width:100%;padding:12px 14px;font-size:15px;font-family:var(--sans);color:var(--ink);
+    background:var(--paper);border:1.5px solid var(--line);border-radius:11px;transition:border-color .14s}
+  .field input:focus{border-color:var(--cairn-bright);background:#fff}
+  .msg{font-size:13.5px;border-radius:11px;padding:11px 13px;margin-bottom:16px}
+  .msg-err{background:#FBE6E6;color:#8a1c1c}
+  .msg-ok{background:var(--good-tint);color:var(--good)}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:-6px;margin-bottom:16px}
+  .auth-foot{margin-top:18px;text-align:center;font-size:13px}
+  .auth-foot a{cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+  .link-btn{background:none;border:none;color:var(--cairn);font:inherit;cursor:pointer;text-decoration:underline;padding:0}
+
+  /* ---------- DASHBOARD ---------- */
+  .topbar{background:rgba(245,247,244,.85);backdrop-filter:saturate(150%) blur(12px);
+    -webkit-backdrop-filter:saturate(150%) blur(12px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+  .topbar .row{display:flex;align-items:center;justify-content:space-between;height:62px;gap:12px}
+  .who{display:flex;align-items:center;gap:10px;min-width:0}
+  .who .name{font-weight:600;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40vw}
+  .tag{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:3px 8px;border-radius:999px;background:var(--emerald-tint);color:var(--cairn)}
+  .dash{padding:30px 0 64px}
+  .dash h1{font-size:clamp(24px,4vw,32px)}
+  .dash .lead{color:var(--ink-soft);margin-top:6px;font-size:15px}
+  .grid{display:grid;gap:16px;margin-top:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:22px}
+  .card h2{font-size:13px;font-family:var(--sans);font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px}
+  .status-grid{grid-template-columns:1fr}
+  @media(min-width:720px){.status-grid{grid-template-columns:1.3fr 1fr}}
+  .site-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .site-line .biz{font-family:var(--serif);font-size:22px;font-weight:600}
+  .badge{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+  .badge-live{background:var(--good-tint);color:var(--good)}
+  .badge-preview{background:var(--warn-tint);color:var(--warn)}
+  .kv{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+  .kv:first-of-type{border-top:none}
+  .kv .k{color:var(--ink-soft)}
+  .kv .v{font-weight:600;text-align:right}
+
+  /* stat tiles */
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px}
+  .tile .label{font-size:12px;font-weight:600;color:var(--ink-soft);letter-spacing:.03em}
+  .tile .big{font-family:var(--serif);font-size:38px;font-weight:600;margin-top:4px;color:var(--cairn)}
+
+  /* range toggle */
+  .range{display:inline-flex;background:var(--paper-2);border-radius:999px;padding:3px}
+  .range button{border:none;background:none;font:inherit;font-size:13px;font-weight:600;color:var(--ink-soft);
+    padding:6px 14px;border-radius:999px;cursor:pointer}
+  .range button.on{background:#fff;color:var(--cairn);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+  .chart-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .chart-head h2{margin:0}
+  canvas{width:100%;display:block}
+
+  /* bar lists */
+  .barrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:7px 0}
+  .barrow .lbl{font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .barrow .val{font-size:13px;font-weight:600;color:var(--ink-soft)}
+  .bartrack{grid-column:1/-1;height:7px;background:var(--paper-2);border-radius:99px;overflow:hidden;margin-top:-2px}
+  .barfill{height:100%;background:linear-gradient(90deg,var(--cairn),var(--cairn-bright));border-radius:99px}
+  .two-col{grid-template-columns:1fr}
+  @media(min-width:720px){.two-col{grid-template-columns:1fr 1fr}}
+
+  .empty{text-align:center;color:var(--ink-soft);font-size:14.5px;padding:30px 10px}
+  .empty .big{font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:6px}
+  .footnote{margin-top:26px;text-align:center;font-size:12.5px;color:var(--ink-soft)}
+  .spinner{display:inline-block;width:18px;height:18px;border:2.5px solid rgba(255,255,255,.4);
+    border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-3px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media(prefers-reduced-motion:reduce){.spinner{animation:none}.btn:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<section id="view-login" class="auth-screen hidden">
+  <div class="auth-card">
+    <a class="brand" href="/">
+      <svg width="26" height="33" viewBox="0 0 30 38" fill="none" aria-hidden="true"><g fill="var(--cairn)">
+        <path d="M15 0.5c.4 2 .9 2.6 2.7 3-1.8.4-2.3 1-2.7 3-.4-2-.9-2.6-2.7-3 1.8-.4 2.3-1 2.7-3z"/>
+        <rect x="6" y="9" width="18" height="7" rx="3.5"/><rect x="3.5" y="18" width="23" height="7.5" rx="3.75"/>
+        <rect x="7.5" y="27.5" width="15" height="7" rx="3.5"/></g></svg>
+      <span class="wordmark"><b>Cairn</b>site</span>
+    </a>
+    <h1>Client portal</h1>
+    <p class="sub">Sign in to see your website and visitor stats.</p>
+    <div id="login-msg" class="msg msg-err hidden"></div>
+    <form id="login-form" autocomplete="on">
+      <div class="field">
+        <label for="login-email">Email</label>
+        <input id="login-email" type="email" required autocomplete="username" placeholder="you@business.com">
+      </div>
+      <div class="field">
+        <label for="login-pass">Password</label>
+        <input id="login-pass" type="password" required autocomplete="current-password" placeholder="Your password">
+      </div>
+      <button id="login-btn" class="btn btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+    <div class="auth-foot"><button class="link-btn" id="forgot-link" type="button">Forgot password?</button></div>
+  </div>
+</section>
+
+<!-- ============ SET NEW PASSWORD (forced on first login) ============ -->
+<section id="view-setpw" class="auth-screen hidden">
+  <div class="auth-card">
+    <a class="brand" href="#"><span class="wordmark"><b>Cairn</b>site</span></a>
+    <h1>Set your password</h1>
+    <p class="sub">Welcome! For your security, please choose a new password before continuing.</p>
+    <div id="setpw-msg" class="msg hidden"></div>
+    <form id="setpw-form">
+      <div class="field">
+        <label for="pw1">New password</label>
+        <input id="pw1" type="password" required autocomplete="new-password" placeholder="At least 8 characters">
+      </div>
+      <p class="hint">Use 8+ characters. Pick something only you would know.</p>
+      <div class="field">
+        <label for="pw2">Confirm new password</label>
+        <input id="pw2" type="password" required autocomplete="new-password" placeholder="Type it again">
+      </div>
+      <button id="setpw-btn" class="btn btn-primary btn-block" type="submit">Save &amp; continue</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ DASHBOARD ============ -->
+<div id="view-dash" class="hidden">
+  <header class="topbar">
+    <div class="wrap row">
+      <a class="brand" href="/">
+        <svg width="22" height="28" viewBox="0 0 30 38" fill="none" aria-hidden="true"><g fill="var(--cairn)">
+          <path d="M15 0.5c.4 2 .9 2.6 2.7 3-1.8.4-2.3 1-2.7 3-.4-2-.9-2.6-2.7-3 1.8-.4 2.3-1 2.7-3z"/>
+          <rect x="6" y="9" width="18" height="7" rx="3.5"/><rect x="3.5" y="18" width="23" height="7.5" rx="3.75"/>
+          <rect x="7.5" y="27.5" width="15" height="7" rx="3.5"/></g></svg>
+        <span class="wordmark"><b>Cairn</b>site</span>
+      </a>
+      <div class="who">
+        <span class="name" id="who-name"></span>
+        <button class="btn btn-ghost" id="logout-btn" style="padding:8px 16px;font-size:13px">Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dash">
+    <div class="wrap">
+      <p class="eyebrow">Your dashboard</p>
+      <h1 id="dash-title">Welcome back</h1>
+      <p class="lead">Here's how your website is doing.</p>
+
+      <!-- site status + plan -->
+      <div class="grid status-grid">
+        <div class="card">
+          <h2>Your website</h2>
+          <div class="site-line">
+            <span class="biz" id="site-biz">—</span>
+            <span class="badge" id="site-badge">—</span>
+          </div>
+          <a class="btn btn-primary" id="visit-btn" href="#" target="_blank" rel="noopener">Visit my site ↗</a>
+        </div>
+        <div class="card">
+          <h2>Plan</h2>
+          <div class="kv"><span class="k">Plan</span><span class="v" id="kv-plan">—</span></div>
+          <div class="kv"><span class="k">Status</span><span class="v" id="kv-status">—</span></div>
+          <div class="kv"><span class="k">Client #</span><span class="v num" id="kv-cnum">—</span></div>
+        </div>
+      </div>
+
+      <!-- analytics -->
+      <div class="chart-head" style="margin-top:30px">
+        <h2 style="font-family:var(--serif);font-size:20px;text-transform:none;letter-spacing:-.01em;color:var(--ink)">Visitor analytics</h2>
+        <div class="range" id="range">
+          <button data-d="7">7 days</button>
+          <button data-d="30" class="on">30 days</button>
+          <button data-d="90">90 days</button>
+        </div>
+      </div>
+
+      <div id="analytics-body">
+        <div class="tiles">
+          <div class="tile"><div class="label">Total views</div><div class="big num" id="t-views">0</div></div>
+          <div class="tile"><div class="label">Unique visitors</div><div class="big num" id="t-uniq">0</div></div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h2>Views over time</h2>
+          <canvas id="trend" height="220" aria-label="Views over time chart"></canvas>
+        </div>
+
+        <div class="grid two-col" style="margin-top:16px">
+          <div class="card"><h2>Top pages</h2><div id="top-pages"></div></div>
+          <div class="card"><h2>Where visitors came from</h2><div id="top-refs"></div></div>
+        </div>
+        <div class="grid two-col" style="margin-top:16px">
+          <div class="card"><h2>Devices</h2><div id="devices"></div></div>
+          <div class="card"><h2>Top countries</h2><div id="countries"></div></div>
+        </div>
+      </div>
+
+      <div id="analytics-empty" class="card hidden">
+        <div class="empty">
+          <div class="big">No visitor data yet</div>
+          <p>Once your website is live and people start visiting, your views, visitors and traffic sources will show up here.</p>
+        </div>
+      </div>
+
+      <p class="footnote">Need a change to your site? <a href="https://wa.me/94704164060" target="_blank" rel="noopener">Message us on WhatsApp</a> — we'll take care of it.</p>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  "use strict";
+  var SUPABASE_URL = "https://mpzsksapsehclzztqhjg.supabase.co";
+  var SUPABASE_KEY = "sb_publishable_Q8jSfPjeGW-RuM1Yn_Taaw_AAx76Lqj";
+  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  var $ = function(id){ return document.getElementById(id); };
+  var views = { login:$("view-login"), setpw:$("view-setpw"), dash:$("view-dash") };
+  function show(name){ for(var k in views){ views[k].classList.toggle("hidden", k!==name); } }
+
+  var state = { profile:null, site:null, days:30, stats:null };
+  var trendW = 0; // last known laid-out width of the trend canvas (from ResizeObserver)
+
+  // ---------- boot ----------
+  (async function init(){
+    var s = await sb.auth.getSession();
+    if(!s.data.session){ show("login"); return; }
+    await routeBySession();
+  })();
+
+  async function routeBySession(){
+    var pr = await sb.from("profiles")
+      .select("business_name,role,plan,plan_status,client_number,must_change_password").single();
+    if(pr.error || !pr.data){
+      // authenticated but no profile row — bail out safely
+      await sb.auth.signOut(); show("login");
+      flash("login-msg","msg-err","We couldn't load your account. Please contact us on WhatsApp.");
+      return;
+    }
+    state.profile = pr.data;
+    if(pr.data.must_change_password){ show("setpw"); return; }
+    await loadDashboard();
+  }
+
+  function flash(id, cls, text){
+    var el = $(id); el.className = "msg "+cls; el.textContent = text; el.classList.remove("hidden");
+  }
+
+  // ---------- login ----------
+  $("login-form").addEventListener("submit", async function(e){
+    e.preventDefault();
+    var btn = $("login-btn"); btn.disabled = true; var old = btn.innerHTML; btn.innerHTML = '<span class="spinner"></span>';
+    $("login-msg").classList.add("hidden");
+    var email = $("login-email").value.trim();
+    var pass = $("login-pass").value;
+    var r = await sb.auth.signInWithPassword({ email: email, password: pass });
+    if(r.error){
+      flash("login-msg","msg-err","Wrong email or password. Please try again.");
+      btn.disabled = false; btn.innerHTML = old; return;
+    }
+    btn.innerHTML = old; btn.disabled = false;
+    await routeBySession();
+  });
+
+  $("forgot-link").addEventListener("click", async function(){
+    var email = $("login-email").value.trim();
+    if(!email){ flash("login-msg","msg-err","Type your email above first, then tap “Forgot password”."); return; }
+    await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + "/portal/" });
+    flash("login-msg","msg-ok","If that email is registered, we've sent a reset link. You can also message us on WhatsApp.");
+  });
+
+  // ---------- set password (forced first login) ----------
+  $("setpw-form").addEventListener("submit", async function(e){
+    e.preventDefault();
+    $("setpw-msg").classList.add("hidden");
+    var p1 = $("pw1").value, p2 = $("pw2").value;
+    if(p1.length < 8){ flash("setpw-msg","msg-err","Please use at least 8 characters."); return; }
+    if(p1 !== p2){ flash("setpw-msg","msg-err","The two passwords don't match."); return; }
+    var btn = $("setpw-btn"); btn.disabled = true; var old = btn.innerHTML; btn.innerHTML = '<span class="spinner"></span>';
+    var up = await sb.auth.updateUser({ password: p1 });
+    if(up.error){ flash("setpw-msg","msg-err", up.error.message || "Couldn't update password."); btn.disabled=false; btn.innerHTML=old; return; }
+    await sb.rpc("complete_password_change");
+    state.profile.must_change_password = false;
+    btn.disabled=false; btn.innerHTML=old;
+    await loadDashboard();
+  });
+
+  // ---------- logout ----------
+  $("logout-btn").addEventListener("click", async function(){
+    await sb.auth.signOut(); state = { profile:null, site:null, days:30, stats:null }; show("login");
+  });
+
+  // ---------- dashboard ----------
+  async function loadDashboard(){
+    show("dash");
+    ensureTrendObserver();
+    var p = state.profile;
+    var first = (p.business_name||"there").split(" ")[0];
+    $("who-name").textContent = p.business_name + (p.role==="admin" ? " (admin)" : "");
+    $("dash-title").textContent = "Welcome back, " + p.business_name;
+    $("kv-plan").textContent = p.plan || "—";
+    $("kv-status").textContent = (p.plan_status||"—").replace(/^./,function(c){return c.toUpperCase();});
+    $("kv-cnum").textContent = p.client_number ? ("#"+String(p.client_number).padStart(2,"0")) : "—";
+
+    var sr = await sb.from("sites").select("id,business_name,live_url,domain,status").order("created_at",{ascending:true}).limit(1);
+    var site = sr.data && sr.data[0];
+    state.site = site;
+    if(site){
+      $("site-biz").textContent = site.business_name || p.business_name;
+      var live = site.status === "live";
+      var badge = $("site-badge");
+      badge.textContent = live ? "Live" : "In preview";
+      badge.className = "badge " + (live ? "badge-live" : "badge-preview");
+      var url = site.live_url || (site.domain ? "https://"+site.domain : null);
+      var vb = $("visit-btn");
+      if(url){ vb.href = url; vb.classList.remove("hidden"); } else { vb.classList.add("hidden"); }
+      await refreshStats();
+    } else {
+      $("site-biz").textContent = p.business_name;
+      $("site-badge").textContent = "Not set up yet";
+      $("site-badge").className = "badge badge-preview";
+      $("visit-btn").classList.add("hidden");
+      showEmpty(true);
+    }
+  }
+
+  // range toggle
+  Array.prototype.forEach.call($("range").querySelectorAll("button"), function(b){
+    b.addEventListener("click", function(){
+      Array.prototype.forEach.call($("range").querySelectorAll("button"), function(x){ x.classList.remove("on"); });
+      b.classList.add("on"); state.days = parseInt(b.getAttribute("data-d"),10); refreshStats();
+    });
+  });
+
+  async function refreshStats(){
+    if(!state.site) return;
+    var r = await sb.rpc("stats", { p_site_id: state.site.id, p_days: state.days });
+    if(r.error){ showEmpty(true); return; }
+    var d = r.data; state.stats = d;
+    var total = d.total_views || 0;
+    if(total === 0){ showEmpty(true); return; }
+    showEmpty(false);
+    $("t-views").textContent = fmt(total);
+    $("t-uniq").textContent = fmt(d.unique_visitors||0);
+    // Draw on short timers so the canvas is measured after layout settles
+    // (the ResizeObserver below also redraws on genuine resizes).
+    drawTrendSoon(d);
+    barList("top-pages", d.top_pages||[], "path", "views");
+    barList("top-refs", d.top_referrers||[], "referrer", "views");
+    barList("devices", d.devices||[], "device", "views");
+    barList("countries", d.countries||[], "country", "views");
+  }
+
+  function drawTrendSoon(d){
+    [0, 80, 280].forEach(function(ms){
+      setTimeout(function(){
+        if(state.stats === d && d.total_views > 0){
+          var w = Math.round($("trend").getBoundingClientRect().width);
+          drawTrend(d.by_day||[], state.days, w);
+        }
+      }, ms);
+    });
+  }
+
+  function showEmpty(isEmpty){
+    $("analytics-body").classList.toggle("hidden", isEmpty);
+    $("analytics-empty").classList.toggle("hidden", !isEmpty);
+  }
+
+  function fmt(n){ return (n>=1000)? (n/1000).toFixed(n%1000?1:0)+"k" : String(n); }
+
+  function barList(containerId, rows, labelKey, valKey){
+    var el = $(containerId); el.innerHTML = "";
+    if(!rows.length){ el.innerHTML = '<p style="color:var(--ink-soft);font-size:13.5px">No data in this period.</p>'; return; }
+    var max = Math.max.apply(null, rows.map(function(r){ return r[valKey]; }));
+    rows.forEach(function(r){
+      var pct = max ? Math.round(r[valKey]/max*100) : 0;
+      var row = document.createElement("div"); row.className = "barrow";
+      var lbl = document.createElement("span"); lbl.className="lbl"; lbl.textContent = r[labelKey];
+      var val = document.createElement("span"); val.className="val num"; val.textContent = fmt(r[valKey]);
+      var track = document.createElement("div"); track.className="bartrack";
+      var fill = document.createElement("div"); fill.className="barfill"; fill.style.width = Math.max(pct,3)+"%";
+      track.appendChild(fill);
+      row.appendChild(lbl); row.appendChild(val); row.appendChild(track);
+      el.appendChild(row);
+    });
+  }
+
+  // ---- canvas line chart (views over time) ----
+  function drawTrend(byDay, days, cssWArg){
+    var canvas = $("trend");
+    var cssW = cssWArg || canvas.getBoundingClientRect().width;
+    if(!cssW || cssW < 60){ cssW = (canvas.parentNode.getBoundingClientRect().width || 320) - 44; }
+    cssW = Math.max(cssW, 280);
+    var cssH = 220;
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width = cssW*dpr; canvas.height = cssH*dpr;
+    var ctx = canvas.getContext("2d"); ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,cssW,cssH);
+
+    // build a continuous series across the window so gaps show as zero
+    var map = {}; byDay.forEach(function(r){ map[r.day] = r.views; });
+    var pts = []; var today = new Date();
+    for(var i=days-1;i>=0;i--){
+      var d = new Date(today.getTime() - i*86400000);
+      var key = d.toISOString().slice(0,10);
+      pts.push({ day:key, v: map[key]||0 });
+    }
+    var maxV = Math.max.apply(null, pts.map(function(p){return p.v;})); if(maxV<=0) maxV=1;
+    var padL=34, padR=10, padT=12, padB=24;
+    var W = cssW-padL-padR, H = cssH-padT-padB;
+    var x = function(i){ return padL + (pts.length<=1?W/2: i/(pts.length-1)*W); };
+    var y = function(v){ return padT + H - (v/maxV)*H; };
+
+    // gridlines + y labels
+    ctx.font = "11px "+getComputedStyle(document.body).fontFamily;
+    ctx.fillStyle = "#46524A"; ctx.strokeStyle = "rgba(21,32,26,.08)"; ctx.lineWidth=1;
+    var steps=4;
+    for(var s=0;s<=steps;s++){
+      var val = Math.round(maxV*s/steps); var yy = y(val);
+      ctx.beginPath(); ctx.moveTo(padL,yy); ctx.lineTo(cssW-padR,yy); ctx.stroke();
+      ctx.fillText(String(val), 4, yy+3);
+    }
+    // area + line
+    var grad = ctx.createLinearGradient(0,padT,0,padT+H);
+    grad.addColorStop(0,"rgba(15,122,77,.22)"); grad.addColorStop(1,"rgba(15,122,77,0)");
+    ctx.beginPath(); ctx.moveTo(x(0),y(pts[0].v));
+    for(var i=1;i<pts.length;i++) ctx.lineTo(x(i),y(pts[i].v));
+    ctx.lineTo(x(pts.length-1), padT+H); ctx.lineTo(x(0), padT+H); ctx.closePath();
+    ctx.fillStyle = grad; ctx.fill();
+
+    ctx.beginPath(); ctx.moveTo(x(0),y(pts[0].v));
+    for(var i=1;i<pts.length;i++) ctx.lineTo(x(i),y(pts[i].v));
+    ctx.strokeStyle = "#0A4F33"; ctx.lineWidth=2.5; ctx.lineJoin="round"; ctx.stroke();
+
+    // endpoint dot
+    var last = pts.length-1;
+    ctx.beginPath(); ctx.arc(x(last),y(pts[last].v),3.5,0,Math.PI*2); ctx.fillStyle="#0A4F33"; ctx.fill();
+
+    // x labels (first + last)
+    ctx.fillStyle="#46524A"; ctx.textAlign="left";
+    ctx.fillText(shortDate(pts[0].day), padL, cssH-7);
+    ctx.textAlign="right"; ctx.fillText(shortDate(pts[last].day), cssW-padR, cssH-7);
+    ctx.textAlign="left";
+  }
+  function shortDate(iso){ var d=new Date(iso+"T00:00:00"); return d.toLocaleDateString(undefined,{month:"short",day:"numeric"}); }
+
+  // Draw the chart whenever the canvas actually has a laid-out width (handles
+  // the un-hide transition) and on every resize, using its true measured size.
+  var trendObserver = null;
+  function ensureTrendObserver(){
+    if(trendObserver || !window.ResizeObserver) return;
+    trendObserver = new ResizeObserver(function(entries){
+      var w = Math.round(entries[0].contentRect.width);
+      if(!w) return;
+      trendW = w;
+      if(state.stats && state.stats.total_views > 0) drawTrend(state.stats.by_day||[], state.days, w);
+    });
+    trendObserver.observe($("trend"));
+  }
+})();
+</script>
+</body>
+</html>

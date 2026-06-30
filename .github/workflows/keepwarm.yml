@@ -1,0 +1,27 @@
+name: Keep Supabase awake
+
+# Supabase free-tier projects pause after ~7 days with no API activity, which
+# would stop clients logging into the portal. This pings the database once a
+# day so the project stays ACTIVE. Uses only the public publishable key against
+# an RLS-protected table (returns nothing) — no secrets required.
+
+on:
+  schedule:
+    - cron: "17 6 * * *"   # daily ~06:17 UTC
+  workflow_dispatch:        # allow manual run
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST
+        run: |
+          curl -sS -o /dev/null -w "REST %{http_code}\n" \
+            "https://mpzsksapsehclzztqhjg.supabase.co/rest/v1/sites?select=id&limit=1" \
+            -H "apikey: sb_publishable_Q8jSfPjeGW-RuM1Yn_Taaw_AAx76Lqj" \
+            -H "Authorization: Bearer sb_publishable_Q8jSfPjeGW-RuM1Yn_Taaw_AAx76Lqj"
+      - name: Ping Supabase Auth health
+        run: |
+          curl -sS -o /dev/null -w "AUTH %{http_code}\n" \
+            "https://mpzsksapsehclzztqhjg.supabase.co/auth/v1/health" \
+            -H "apikey: sb_publishable_Q8jSfPjeGW-RuM1Yn_Taaw_AAx76Lqj"
