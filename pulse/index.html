@@ -15,7 +15,7 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -54,17 +54,19 @@
 </script>
 <style>
   :root{
-    --pine:#0A4F33; --pine-700:#0C633E; --pine-900:#073A26;
-    --ink:#10211A; --ink-soft:#465249;
-    --paper:#F3F5F1; --surface:#FFFFFF; --surface-2:#E9ECE3;
-    --line:rgba(16,33,26,.12); --line-2:rgba(16,33,26,.07);
-    --ember:#C2691B; --ember-700:#A6560F; --ember-soft:#F4E7D6;
+    --pine:#0A4F33; --pine-700:#0D6342; --pine-900:#073A26;
+    --ink:#16181C; --ink-soft:#5A5F66;
+    --paper:#FAFAF8; --surface:#FFFFFF; --surface-2:#F3F3F0; --card:#FFFFFF; --paper-2:#F3F3F0;
+    --line:#E8E8E4; --line-2:rgba(16,24,40,.07);
+    --ember:#0A4F33; --ember-700:#0D6342; --ember-soft:#EAF1ED;
+    --cairn:#0A4F33; --cairn-bright:#0D6342; --emerald-tint:#EAF1ED;
     --wa:#25D366;
-    --maxw:1140px; --r-lg:22px; --r-md:14px; --r-sm:10px;
-    --shadow-sm:0 1px 2px rgba(16,33,26,.05), 0 10px 30px -18px rgba(16,33,26,.22);
-    --shadow-lg:0 30px 60px -30px rgba(10,79,51,.45);
-    --serif:'Fraunces',Georgia,'Times New Roman',serif;
-    --sans:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --maxw:1140px; --radius:16px; --r-lg:16px; --r-md:12px; --r-sm:9px;
+    --shadow:0 1px 2px rgba(16,24,40,.04), 0 4px 14px rgba(16,24,40,.05);
+    --shadow-sm:0 1px 2px rgba(16,24,40,.04), 0 4px 14px rgba(16,24,40,.05);
+    --shadow-lg:0 1px 2px rgba(16,24,40,.05), 0 22px 50px -26px rgba(16,24,40,.22);
+    --serif:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -172,6 +174,10 @@
   .foot-nav a:hover{color:#fff}
   .foot-bottom{margin-top:36px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);font-size:13.5px;color:rgba(255,255,255,.5);display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;position:relative}
   @media (min-width:760px){.foot-top{flex-direction:row;justify-content:space-between;align-items:flex-start}}
+
+  .anim{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);will-change:opacity,transform}
+  .anim.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.anim,.anim.in{opacity:1!important;transform:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -323,6 +329,25 @@
     </div>
   </div>
 </footer>
+
+<script type="module">
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(!reduce && 'IntersectionObserver' in window){
+    var sel = '.sec-head,.card,.entry,.gt-card,.step,.action,.audience .tags span,.faq details,article.entry,.feature,.kv';
+    var els = [].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(el){ el.classList.add('anim'); });
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    els.forEach(function(el){ io.observe(el); });
+  }
+  if(!reduce){
+    import('https://cdn.jsdelivr.net/npm/lenis@1.3.25/+esm').then(function(L){
+      var Lenis=L.default||L.Lenis||L; var lenis=new Lenis({lerp:0.1,smoothWheel:true,autoRaf:false});
+      function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+    }).catch(function(){});
+  }
+})();
+</script>
 
 </body>
 </html>
