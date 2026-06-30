@@ -17,6 +17,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<!-- 3D backdrop (Three.js r185, deferred + capability-gated; importmap must precede module scripts) -->
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.185.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.185.0/examples/jsm/"}}
+</script>
+
 <!-- Open Graph -->
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to get your business online (without the tech headache)">
@@ -49,16 +54,16 @@
 <style>
   :root{
     --pine:#0A4F33; --pine-700:#0D6342; --pine-900:#073A26;
-    --ink:#16181C; --ink-soft:#5A5F66;
-    --paper:#FAFAF8; --surface:#FFFFFF; --surface-2:#F3F3F0; --card:#FFFFFF; --paper-2:#F3F3F0;
-    --line:#E8E8E4; --line-2:#EFEFEC;
-    --ember:#0A4F33; --ember-700:#0D6342; --ember-soft:#EAF1ED;
-    --cairn:#0A4F33; --cairn-bright:#0D6342; --emerald-tint:#EAF1ED;
+    --ink:#E7EAE7; --ink-soft:#aab3ab;
+    --paper:transparent; --surface:rgba(255,255,255,.05); --surface-2:transparent; --card:rgba(255,255,255,.05); --paper-2:transparent;
+    --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.06);
+    --ember:#8FBFA3; --ember-700:#8FBFA3; --ember-soft:rgba(143,191,163,.16);
+    --cairn:#8FBFA3; --cairn-bright:#8FBFA3; --emerald-tint:rgba(143,191,163,.16);
     --wa:#25D366;
     --maxw:1140px; --radius:16px; --r-lg:16px; --r-md:12px; --r-sm:9px;
-    --shadow:0 1px 2px rgba(16,24,40,.04), 0 4px 14px rgba(16,24,40,.05);
-    --shadow-sm:0 1px 2px rgba(16,24,40,.04), 0 4px 14px rgba(16,24,40,.05);
-    --shadow-lg:0 1px 2px rgba(16,24,40,.05), 0 22px 50px -26px rgba(16,24,40,.22);
+    --shadow:0 18px 40px -24px rgba(0,0,0,.6);
+    --shadow-sm:0 18px 40px -24px rgba(0,0,0,.6);
+    --shadow-lg:0 28px 60px -30px rgba(0,0,0,.7);
     --serif:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
@@ -215,10 +220,68 @@
   .anim{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);will-change:opacity,transform}
   .anim.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.anim,.anim.in{opacity:1!important;transform:none!important;transition:none!important}}
+
+  /* ===== fixed traveling 3D backdrop + dark immersive theme ===== */
+  .cairn-fixed{position:fixed;inset:0;z-index:-1;pointer-events:none;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(120% 92% at 62% 24%, #14241c 0%, #0b1310 50%, #070b09 100%)}
+  .cairn-fixed svg.cairn-art{width:min(42vw,360px);opacity:.8;transition:opacity 1s ease}
+  .cairn-fixed .cairn-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.1s ease}
+  .cairn-fixed.cairn-3d-ready .cairn-canvas{opacity:1}
+  .cairn-fixed.cairn-3d-ready svg.cairn-art{opacity:0}
+  html{background:#070b09}
+  body{background:transparent;color:#E7EAE7}
+  main{position:relative;z-index:1}
+  footer{position:relative;z-index:1;background:#070b09}
+  header{background:rgba(9,15,12,.66);border-bottom:1px solid rgba(255,255,255,.08)}
+  .wordmark{color:#EAEDEA} .wordmark b{color:#8FBFA3}
+  nav.main a{color:#aab3ab} nav.main a:hover{color:#fff} nav.main a::after{background:#8FBFA3}
+  nav.main a.active{color:#fff} nav.main a.active::after{background:#8FBFA3}
+  .eyebrow{color:#8FBFA3} .eyebrow::before{background:#6FA386}
+
+  /* breadcrumb + back link */
+  .breadcrumb{color:#aab3ab} .breadcrumb a{color:#aab3ab} .breadcrumb a:hover{color:#8FBFA3}
+  .breadcrumb span[aria-current]{color:#EFF1EE}
+  .back-link{color:#8FBFA3} .back-link:hover{color:#bfe0cf}
+
+  /* article hero + body (readable light-on-dark) */
+  .art-head h1{color:#EFF1EE} .art-meta{color:#9aa39b}
+  .feature-img{border-color:rgba(255,255,255,.12);box-shadow:0 18px 40px -24px rgba(0,0,0,.6)}
+  .prose h2,.prose h3{color:#EFF1EE}
+  .prose p{color:#c7cdc8} .prose .lead-p{color:#bcc4bc}
+  .prose ul li{color:#c7cdc8} .prose ul li::before{background:#8FBFA3}
+  .prose ol li{color:#c7cdc8}
+  .prose ol li::before{background:#1f4e3a;color:#dff0e6}   /* number badge: deeper green, light digit */
+  .prose li strong,.prose strong{color:#EFF1EE}
+  .prose a:not(.btn){color:#8FBFA3;background-image:linear-gradient(#8FBFA3,#8FBFA3)}
+  .prose a:not(.btn):hover{color:#bfe0cf;background-image:linear-gradient(#bfe0cf,#bfe0cf)}
+
+  /* two-ways comparison cards — dark glass */
+  .way{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);box-shadow:none;
+    -webkit-backdrop-filter:blur(8px) saturate(140%);backdrop-filter:blur(8px) saturate(140%)}
+  .way h3{color:#EFF1EE} .way>p{color:#aab3ab} .way li{color:#c7cdc8} .way li::before{background:#8FBFA3}
+
+  /* WhatsApp CTA box — keep the green CTA (legible on dark) */
+  .cta-box{background:var(--pine);color:#fff;box-shadow:0 28px 60px -30px rgba(0,0,0,.7)}
+
+  /* related guides */
+  .related{border-top-color:rgba(255,255,255,.1)}
+  .related li a{color:#8FBFA3} .related li a:hover{color:#bfe0cf} .related li a svg{color:#8FBFA3}
+  .related .all a{color:#9aa39b} .related .all a:hover{color:#8FBFA3}
+  @media (prefers-reduced-motion:reduce){ .cairn-fixed{opacity:.3} }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+
+<!-- Fixed 3D backdrop: the cairn travels behind the whole page as you scroll -->
+<div class="cairn-fixed" id="cairnStage" role="img" aria-label="A cairn — a stack of smooth stones, the Cairnsite mark.">
+  <svg class="cairn-art" viewBox="0 0 200 260" fill="none" aria-hidden="true">
+    <ellipse cx="100" cy="72" rx="42" ry="22" fill="#C9B79C"/><ellipse cx="100" cy="66" rx="42" ry="20" fill="#DCCCB2"/>
+    <ellipse cx="100" cy="124" rx="60" ry="28" fill="#A8916F"/><ellipse cx="100" cy="118" rx="60" ry="26" fill="#C9B79C"/>
+    <ellipse cx="100" cy="186" rx="50" ry="26" fill="#A8916F"/><ellipse cx="100" cy="180" rx="50" ry="24" fill="#D3BFA1"/>
+    <ellipse cx="100" cy="236" rx="68" ry="24" fill="rgba(0,0,0,.2)"/>
+  </svg>
+</div>
 
 <!-- ============ HEADER ============ -->
 <header>
@@ -422,21 +485,47 @@
 </footer>
 
 <script type="module">
+/* Scroll reveal (progressive enhancement; skipped under reduced-motion or without IO). */
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if(!reduce && 'IntersectionObserver' in window){
-    var sel = '.sec-head,.card,.entry,.gt-card,.step,.action,.audience .tags span,.faq details,article.entry,.feature,.kv';
-    var els = [].slice.call(document.querySelectorAll(sel));
-    els.forEach(function(el){ el.classList.add('anim'); });
-    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
-    els.forEach(function(el){ io.observe(el); });
-  }
-  if(!reduce){
-    import('https://cdn.jsdelivr.net/npm/lenis@1.3.25/+esm').then(function(L){
-      var Lenis=L.default||L.Lenis||L; var lenis=new Lenis({lerp:0.1,smoothWheel:true,autoRaf:false});
-      function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
-    }).catch(function(){});
-  }
+  if(reduce || !('IntersectionObserver' in window)) return;
+  var sel = '.sec-head,.card,.entry,.gt-card,.step,.action,.audience .tags span,.faq details,article.entry,.feature,.kv,.way,.related,.cta-box';
+  var els = [].slice.call(document.querySelectorAll(sel));
+  els.forEach(function(el){ el.classList.add('anim'); });
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<script type="module">
+/* Tiered, deferred 3D backdrop. lite = keep instant SVG (download nothing);
+   mid = 3D + fresnel + embers (no bloom); full = everything incl. bloom.
+   Lenis smooth-scroll drives the cairn from whole-page scroll progress. */
+(function(){
+  var stage = document.getElementById('cairnStage'); if(!stage) return;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function webglOK(){ try{ var c=document.createElement('canvas'); return !!(window.WebGLRenderingContext && (c.getContext('webgl2')||c.getContext('webgl'))); }catch(e){ return false; } }
+  var conn = navigator.connection || {};
+  if(reduce || conn.saveData || !webglOK()) return;       // lite: keep instant SVG
+  var narrow = innerWidth < 700, coarse = matchMedia('(pointer:coarse)').matches;
+  var mem = navigator.deviceMemory || 8, cores = navigator.hardwareConcurrency || 8;
+  var tier = (narrow || coarse || mem <= 4 || cores <= 4) ? 'mid' : 'full';
+  var boot = function(){
+    import('/assets/cairn.js').then(function(m){
+      var inst = m.mountCairn(stage, { tier: tier });
+      window.addEventListener('pagehide', function(){ inst && inst.destroy && inst.destroy(); }, {once:true});
+      function progress(){ var max=(document.documentElement.scrollHeight-window.innerHeight)||1; return Math.min(1, Math.max(0, (window.scrollY||window.pageYOffset)/max)); }
+      import('https://cdn.jsdelivr.net/npm/lenis@1.3.25/+esm').then(function(L){
+        var Lenis = L.default || L.Lenis || L;
+        var lenis = new Lenis({ lerp:0.1, smoothWheel:true, autoRaf:false });
+        function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+        lenis.on('scroll', function(){ inst.setProgress(progress()); }); inst.setProgress(progress());
+      }).catch(function(){
+        addEventListener('scroll', function(){ inst.setProgress(progress()); }, {passive:true}); inst.setProgress(progress());
+      });
+    }).catch(function(){ /* SVG stays */ });
+  };
+  ('requestIdleCallback' in window) ? requestIdleCallback(boot,{timeout:1800}) : window.addEventListener('load', function(){ setTimeout(boot,200); }, {once:true});
 })();
 </script>
 </body>

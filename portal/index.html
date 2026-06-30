@@ -16,22 +16,22 @@
 <style>
   :root{
     --pine:#0A4F33; --pine-700:#0D6342; --pine-900:#073A26;
-    --ink:#16181C; --ink-soft:#5A5F66;
-    --paper:#FAFAF8; --surface:#FFFFFF; --surface-2:#F3F3F0;
-    --line:#E8E8E4; --line-2:rgba(16,24,40,.06);
-    --ember:#0A4F33; --ember-700:#0D6342; --ember-soft:#EAF1ED;
+    --ink:#E7EAE7; --ink-soft:#aab3ab;
+    --paper:#0a120e; --surface:rgba(255,255,255,.05); --surface-2:rgba(255,255,255,.03);
+    --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.06);
+    --ember:#8FBFA3; --ember-700:#8FBFA3; --ember-soft:rgba(143,191,163,.16);
     --wa:#25D366;
     /* status tints */
-    --good:#0A4F33; --good-tint:#EAF1ED; --warn:#0D6342; --warn-tint:var(--ember-soft);
+    --good:#8FBFA3; --good-tint:rgba(143,191,163,.16); --warn:#C9A86A; --warn-tint:rgba(201,168,106,.16);
     --maxw:1140px; --r-lg:16px; --r-md:12px; --r-sm:9px;
-    --shadow:0 1px 2px rgba(16,24,40,.04), 0 4px 14px rgba(16,24,40,.05);
-    --shadow-sm:0 1px 2px rgba(16,24,40,.04), 0 4px 14px rgba(16,24,40,.05);
-    --shadow-lg:0 1px 2px rgba(16,24,40,.05), 0 22px 50px -26px rgba(16,24,40,.22);
+    --shadow:0 18px 40px -24px rgba(0,0,0,.6);
+    --shadow-sm:0 18px 40px -24px rgba(0,0,0,.6);
+    --shadow-lg:0 28px 60px -30px rgba(0,0,0,.7);
     --serif:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
     /* legacy aliases (kept so any inline var() refs still resolve) */
-    --cairn:#0A4F33; --cairn-bright:#0D6342; --card:var(--surface); --paper-2:var(--surface-2);
-    --emerald-tint:#EAF1ED; --radius:var(--r-lg);
+    --cairn:#8FBFA3; --cairn-bright:#8FBFA3; --card:var(--surface); --paper-2:var(--surface-2);
+    --emerald-tint:rgba(143,191,163,.16); --radius:var(--r-lg);
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
@@ -162,6 +162,12 @@
   .anim{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);will-change:opacity,transform}
   .anim.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.anim,.anim.in{opacity:1!important;transform:none!important;transition:none!important}}
+  /* dark theme touch-ups (portal stays clean; no traveling 3D) */
+  .wordmark b{color:#8FBFA3}
+  .brand svg g{fill:#cfe6da}
+  .topbar{background:rgba(9,15,12,.72)}
+  .msg-err{background:rgba(220,90,90,.16);color:#ffb4b4}
+  .field input::placeholder{color:#7e857e}
 </style>
 </head>
 <body>
@@ -520,7 +526,7 @@
 
     // gridlines + y labels
     ctx.font = "11px "+getComputedStyle(document.body).fontFamily;
-    ctx.fillStyle = "#46524A"; ctx.strokeStyle = "rgba(21,32,26,.08)"; ctx.lineWidth=1;
+    ctx.fillStyle = "#9aa39b"; ctx.strokeStyle = "rgba(255,255,255,.1)"; ctx.lineWidth=1;
     var steps=4;
     for(var s=0;s<=steps;s++){
       var val = Math.round(maxV*s/steps); var yy = y(val);
@@ -529,7 +535,7 @@
     }
     // area + line
     var grad = ctx.createLinearGradient(0,padT,0,padT+H);
-    grad.addColorStop(0,"rgba(15,122,77,.22)"); grad.addColorStop(1,"rgba(15,122,77,0)");
+    grad.addColorStop(0,"rgba(143,191,163,.28)"); grad.addColorStop(1,"rgba(143,191,163,0)");
     ctx.beginPath(); ctx.moveTo(x(0),y(pts[0].v));
     for(var i=1;i<pts.length;i++) ctx.lineTo(x(i),y(pts[i].v));
     ctx.lineTo(x(pts.length-1), padT+H); ctx.lineTo(x(0), padT+H); ctx.closePath();
@@ -537,14 +543,14 @@
 
     ctx.beginPath(); ctx.moveTo(x(0),y(pts[0].v));
     for(var i=1;i<pts.length;i++) ctx.lineTo(x(i),y(pts[i].v));
-    ctx.strokeStyle = "#0A4F33"; ctx.lineWidth=2.5; ctx.lineJoin="round"; ctx.stroke();
+    ctx.strokeStyle = "#8FBFA3"; ctx.lineWidth=2.5; ctx.lineJoin="round"; ctx.stroke();
 
     // endpoint dot
     var last = pts.length-1;
-    ctx.beginPath(); ctx.arc(x(last),y(pts[last].v),3.5,0,Math.PI*2); ctx.fillStyle="#0A4F33"; ctx.fill();
+    ctx.beginPath(); ctx.arc(x(last),y(pts[last].v),3.5,0,Math.PI*2); ctx.fillStyle="#8FBFA3"; ctx.fill();
 
     // x labels (first + last)
-    ctx.fillStyle="#46524A"; ctx.textAlign="left";
+    ctx.fillStyle="#9aa39b"; ctx.textAlign="left";
     ctx.fillText(shortDate(pts[0].day), padL, cssH-7);
     ctx.textAlign="right"; ctx.fillText(shortDate(pts[last].day), cssW-padR, cssH-7);
     ctx.textAlign="left";
