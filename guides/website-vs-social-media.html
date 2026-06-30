@@ -208,6 +208,7 @@
   .cairn-fixed svg.cairn-art{width:min(42vw,360px);opacity:.8;transition:opacity 1s ease}
   .cairn-fixed .cairn-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.1s ease}
   .cairn-fixed.cairn-3d-ready .cairn-canvas{opacity:1}
+  .cairn-fixed::after{content:"";position:absolute;inset:0;background:rgba(8,12,10,.62);pointer-events:none;z-index:1}
   .cairn-fixed.cairn-3d-ready svg.cairn-art{opacity:0}
   html{background:#070b09}
   body{background:transparent;color:#E7EAE7}
