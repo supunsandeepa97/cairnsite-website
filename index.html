@@ -115,8 +115,8 @@
   nav.main a:hover{color:var(--pine)}
   nav.main a::after{content:"";position:absolute;left:0;right:100%;bottom:-3px;height:2px;background:var(--ember);transition:right .22s ease;border-radius:2px}
   nav.main a:hover::after{right:0}
-  .header-cta{display:none}
-  @media (min-width:880px){nav.main{display:flex}.header-cta{display:inline-flex}}
+  .header-cta{display:inline-flex}
+  @media (min-width:880px){nav.main{display:flex}}
 
   /* hero */
   .hero{padding:74px 0 80px;position:relative}
@@ -140,7 +140,7 @@
   @media (prefers-reduced-motion:reduce){.spark{animation:none;opacity:1}}
 
   /* section scaffolding */
-  section{position:relative}
+  section{position:relative;scroll-margin-top:86px}
   .sec-head{max-width:60ch}
   .sec-head h2{font-size:clamp(29px,4.6vw,44px);margin-top:14px}
   .sec-head .lead{margin-top:15px;color:var(--ink-soft);font-size:18px;line-height:1.55}
