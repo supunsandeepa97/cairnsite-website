@@ -16,7 +16,7 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- 3D hero (Three.js r185, deferred + capability-gated; importmap must precede module scripts) -->
 <script type="importmap">
@@ -58,17 +58,17 @@
 </script>
 <style>
   :root{
-    --pine:#0A4F33; --pine-700:#0C633E; --pine-900:#073A26;
-    --ink:#10211A; --ink-soft:#465249;
-    --paper:#F3F5F1; --surface:#FFFFFF; --surface-2:#E9ECE3;
-    --line:rgba(16,33,26,.12); --line-2:rgba(16,33,26,.07);
-    --ember:#C2691B; --ember-700:#A6560F; --ember-soft:#F4E7D6;
+    --pine:#0A4F33; --pine-700:#0D6342; --pine-900:#073A26;
+    --ink:#16181C; --ink-soft:#5A5F66; --ink-mute:#8A8F96;
+    --paper:#FAFAF8; --surface:#FFFFFF; --surface-2:#F3F3F0;
+    --line:#E8E8E4; --line-2:#EFEFEC;
+    --ember:#0A4F33; --ember-700:#0D6342; --ember-soft:#EAF1ED;   /* accent = brand green; one restrained accent */
     --wa:#25D366;
-    --maxw:1140px; --r-lg:22px; --r-md:14px; --r-sm:10px;
-    --shadow-sm:0 1px 2px rgba(16,33,26,.05), 0 10px 30px -18px rgba(16,33,26,.22);
-    --shadow-lg:0 30px 60px -30px rgba(10,79,51,.45);
-    --serif:'Fraunces',Georgia,'Times New Roman',serif;
-    --sans:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --maxw:1160px; --r-lg:16px; --r-md:12px; --r-sm:9px;
+    --shadow-sm:0 1px 2px rgba(16,24,40,.04), 0 4px 14px rgba(16,24,40,.05);
+    --shadow-lg:0 1px 2px rgba(16,24,40,.05), 0 22px 50px -26px rgba(16,24,40,.22);
+    --serif:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -127,7 +127,7 @@
   /* ===== full-bleed cinematic hero ===== */
   .topo{position:absolute;inset:0;opacity:.5}
   .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;color:#fff;
-    background:radial-gradient(135% 115% at 70% 36%, #0F7A4D 0%, #0A4F33 40%, #052619 100%)}
+    background:linear-gradient(180deg,#0f1714 0%,#0a0f0d 100%)}
   .hero-bg{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center}
   .hero-bg .topo{opacity:.4}
   .hero-bg svg.cairn-art{width:min(58vw,460px);display:block;position:relative;z-index:1;transition:opacity 1s ease}
@@ -135,13 +135,13 @@
   .hero-bg.cairn-3d-ready .cairn-canvas{opacity:1}
   .hero-bg.cairn-3d-ready svg.cairn-art{opacity:0}
   .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:linear-gradient(90deg, rgba(5,28,18,.86) 0%, rgba(5,28,18,.55) 40%, rgba(5,28,18,0) 72%), linear-gradient(0deg, rgba(5,28,18,.55) 0%, rgba(5,28,18,0) 28%)}
+    background:linear-gradient(90deg, rgba(10,15,13,.82) 0%, rgba(10,15,13,.4) 44%, rgba(10,15,13,0) 76%)}
   .hero-inner{position:relative;z-index:2;width:100%;padding-top:88px;padding-bottom:96px}
   .hero-copy{max-width:640px}
-  .hero .eyebrow{color:#F2B271}
-  .hero .eyebrow::before{background:#E08A3C}
+  .hero .eyebrow{color:#9fb3a6}
+  .hero .eyebrow::before{background:#86A593}
   .hero h1{font-size:clamp(46px,8vw,86px);line-height:.98;margin-top:20px;color:#F6F8F4;letter-spacing:-.025em;max-width:15ch}
-  .hero h1 .w > i.accent{font-style:italic;color:#F2B271;font-weight:460}
+  .hero h1 .w > i.accent{color:#8FB39B}
   .js .hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
   .js .hero h1 .w > i{display:inline-block;font-style:normal;transform:translateY(116%);transition:transform .9s cubic-bezier(.16,1,.3,1)}
   .hero.loaded h1 .w > i{transform:none}
@@ -159,7 +159,7 @@
   .reassure{margin-top:22px;font-size:14.5px;color:rgba(246,248,244,.8);display:flex;align-items:center;gap:9px}
   .js .reassure{opacity:0;transition:opacity .8s ease .74s}
   .hero.loaded .reassure{opacity:1}
-  .reassure svg{color:#F2B271;flex:0 0 auto}
+  .reassure svg{color:#86A593;flex:0 0 auto}
   .scroll-cue{position:absolute;left:50%;bottom:24px;z-index:3;transform:translateX(-50%);color:rgba(246,248,244,.65);
     text-decoration:none;font-size:11px;letter-spacing:.22em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 2.2s ease-in-out infinite}
   @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
@@ -698,28 +698,8 @@
 })();
 </script>
 <script>
-/* Premium UI layer: hero load reveal, film grain, custom cursor, magnetic buttons. Cheap + gated. */
-(function(){
-  var hero = document.querySelector('.hero');
-  if(hero){ setTimeout(function(){ hero.classList.add('loaded'); }, 90); }
-  var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if(!reduce){ var g=document.createElement('div'); g.className='grain'; document.body.appendChild(g); }
-  if(!matchMedia('(pointer:fine)').matches || reduce) return;
-  document.documentElement.classList.add('has-cursor');
-  var dot=document.createElement('div'); dot.className='cursor-dot';
-  var ring=document.createElement('div'); ring.className='cursor-ring';
-  document.body.appendChild(dot); document.body.appendChild(ring);
-  var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-  addEventListener('pointermove',function(e){ mx=e.clientX; my=e.clientY; dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)'; },{passive:true});
-  (function loop(){ rx+=(mx-rx)*0.18; ry+=(my-ry)*0.18; ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)'; requestAnimationFrame(loop); })();
-  var hot='a[href],button,.btn,summary,.gt-card,.card,.action';
-  document.addEventListener('pointerover',function(e){ if(e.target.closest&&e.target.closest(hot)) ring.classList.add('hot'); });
-  document.addEventListener('pointerout',function(e){ if(e.target.closest&&e.target.closest(hot)) ring.classList.remove('hot'); });
-  document.querySelectorAll('.btn').forEach(function(b){
-    b.addEventListener('pointermove',function(e){ var r=b.getBoundingClientRect(); b.style.transform='translate('+(e.clientX-(r.left+r.width/2))*0.2+'px,'+(e.clientY-(r.top+r.height/2))*0.3+'px)'; });
-    b.addEventListener('pointerleave',function(){ b.style.transform=''; });
-  });
-})();
+/* Hero load reveal (kinetic intro). Restraint over effects — no cursor/magnetic/grain. */
+(function(){ var hero = document.querySelector('.hero'); if(hero){ setTimeout(function(){ hero.classList.add('loaded'); }, 90); } })();
 </script>
 
 <script type="module">
