@@ -1,0 +1,34 @@
+name: Daily Pulse refresh
+
+# Runs on GitHub's own servers on a schedule — independent of whether Claude
+# Code, the desktop app, or this machine is open. Mirrors the pattern already
+# proven in sheetready-automation/post.yml: content is pre-written once into
+# a queue file, and this job just pops the next item and posts it — no AI/LLM
+# call happens at run time, so nothing can be delayed by an offline app.
+
+on:
+  schedule:
+    - cron: "30 3 * * *"    # 03:30 UTC daily (~9:00am Sri Lanka)
+  workflow_dispatch:         # also runnable on-demand from the Actions tab
+
+permissions:
+  contents: write            # lets the job commit the updated queue + pulse page back
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Post next queued Pulse entry
+        working-directory: automation
+        run: python run_next.py
+      - name: Commit + push updated pulse page and queue
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pulse/index.html sitemap.xml automation/pulse_queue.json
+          git commit -m "auto: Pulse daily refresh" || echo "nothing to commit"
+          git push

@@ -1,0 +1,106 @@
+{
+  "_note": "Small Business Pulse queue. run_next.py pops the first 'queued' item, injects it into pulse/index.html + its JSON-LD, stamps today's date, marks it 'sent'. Add more entries here anytime to extend the runway. Rules: original content only, no prices, no fabricated stats/testimonials, 2 short paragraphs, warm/plain-English Cairnsite voice.",
+  "posts": [
+    {
+      "id": "pulse-07-mobile-speed",
+      "headline": "If your website takes more than a few seconds to open, most people won't wait",
+      "description": "Most visitors are on their phone and will leave a slow-loading site before they ever see what you offer — speed is a trust signal, not just a technical detail.",
+      "paragraphs": [
+        "Most people finding you online are doing it from their phone, often on the go, and their patience for a slow page is short. If your website takes more than a couple of seconds to open, a good number of visitors will simply leave before they ever see what you offer — and they rarely come back to give it a second try.",
+        "The fix isn't complicated: keep photos reasonably sized instead of uploading huge, uncompressed files, avoid piling on heavy plugins or auto-playing videos, and choose a host built for speed rather than the cheapest option available. A <a href=\"/guides/why-your-small-business-needs-a-website.html\">website built properly from the start</a> loads fast by default — so the only thing slowing a visitor down is deciding whether to message you."
+      ],
+      "status": "sent",
+      "posted_on": "2026-07-01"
+    },
+    {
+      "id": "pulse-08-about-section",
+      "headline": "A short, honest About section does more work than you'd think",
+      "description": "People want to know who they're dealing with before they buy — a few honest sentences about your business build more trust than a long list of services.",
+      "paragraphs": [
+        "Before someone messages a business they've never used, they quietly want to know who they're dealing with. A short About section — a few sentences on how the business started, what you care about, or how long you've been doing this — answers that question before it's even asked.",
+        "You don't need polished marketing language. Write it the way you'd explain it to a new customer standing in front of you: plainly, and a little personally. A photo of you or your team next to it helps even more — it turns a business into a person people feel comfortable reaching out to."
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "pulse-09-one-clear-cta",
+      "headline": "One clear way to get in touch beats five confusing ones",
+      "description": "Offering too many contact options at once makes people hesitate — pick one primary way to reach you and make it impossible to miss.",
+      "paragraphs": [
+        "It's tempting to list every possible way to reach you — phone, email, a contact form, three social media links — hoping to cover all bases. In practice, too many options make people pause and think about which one to use, and that pause is often where they give up.",
+        "Pick one primary channel and make it the obvious choice everywhere: on your website, your Google listing, your social bios. For most local businesses that's <a href=\"https://wa.me/94704164060\">WhatsApp</a> — instant, familiar, and no one has to compose a formal email. Keep the others available lower down for people who prefer them, but make the primary one unmissable."
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "pulse-10-say-what-where",
+      "headline": "Say exactly what you do and exactly where you do it",
+      "description": "Clever taglines lose to plain, specific descriptions — clearly stating your service and location helps both customers and search engines find you.",
+      "paragraphs": [
+        "A clever tagline might sound nice, but it rarely tells a stranger — or a search engine — what you actually do. \"Crafting moments of joy\" says nothing useful; \"Wedding photography in Galle\" says everything a new customer needs in five words.",
+        "Say your service and your location plainly, more than once, on your website, your Google Business Profile, and your social bios. It feels less exciting to write, but it's exactly what people type into a search bar when they're ready to buy — and matching their words is how you get found."
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "pulse-11-fast-replies",
+      "headline": "Answering quickly matters more than answering perfectly",
+      "description": "A fast, simple reply beats a polished one sent hours later — most customers move on to the next business before a slow reply arrives.",
+      "paragraphs": [
+        "When someone messages a business, they're often comparing a few options at once. The business that replies first — even with a short, simple answer — usually wins the customer, regardless of how polished the message is. A perfect reply sent three hours later often arrives too late to matter.",
+        "If you can't always answer instantly, set expectations: a quick \"Thanks for messaging — I'll get back to you within the hour\" keeps someone waiting instead of moving on. Turning on notifications for your business WhatsApp and checking it through the day is a small habit that quietly wins you more customers than a fancier website ever could."
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "pulse-12-consistent-branding",
+      "headline": "Use the same logo, colors and name everywhere — it builds recognition fast",
+      "description": "A different look on every platform makes a business forgettable — using the same logo, colors and name everywhere helps people recognize and trust you faster.",
+      "paragraphs": [
+        "If your Facebook page, Instagram, and website all look like they belong to different businesses — different logos, different colors, a slightly different name — it takes people longer to recognize you and trust that they've found the right place.",
+        "Pick one version of your logo, one or two brand colors, and one exact way of writing your business name, then use them everywhere without variation. It sounds like a small, cosmetic detail, but consistent branding is one of the cheapest ways to look established, even for a business that's brand new."
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "pulse-13-faq-section",
+      "headline": "A simple FAQ section saves you from answering the same question all day",
+      "description": "Adding a short FAQ section to your website answers the questions customers ask most often, before they even have to type them.",
+      "paragraphs": [
+        "Most businesses field the same handful of questions over and over — do you deliver, are you open on Sundays, do you take card payments. Every one of those is a small moment of friction that a website can remove before the customer ever has to ask.",
+        "A short FAQ section with five or six real questions, answered plainly, saves you repetitive typing and gives hesitant visitors the reassurance they need to reach out. Keep it honest and specific — vague answers just create a follow-up question instead of preventing one."
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "pulse-14-google-maps-pin",
+      "headline": "Check that your Google Maps pin actually points at your front door",
+      "description": "An inaccurate map pin sends customers to the wrong building — a two-minute check on Google Maps can prevent a lost sale entirely.",
+      "paragraphs": [
+        "It's a small thing that causes real damage: a Google Maps pin sitting a block away from your actual entrance, sending a customer down the wrong street while they're already running late. Once they're frustrated and lost, some simply give up and go elsewhere.",
+        "Open Google Maps, search your own business, and check the pin lines up with your real entrance — not just the general area. If it's off, you can suggest an edit directly in the app. It takes two minutes and removes one more reason a ready customer doesn't make it through your door."
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "pulse-15-real-photos",
+      "headline": "Real, in-progress photos build more trust than posed ones",
+      "description": "Everyday, honest photos of your work in progress build more trust with customers than a single polished, posed photoshoot.",
+      "paragraphs": [
+        "A single glossy, posed photo can actually work against you — it can look more like a stock image than a real business. Photos taken mid-work — hands actually doing the job, a dish being plated, a space being set up — read as more honest, and honesty is what builds trust with someone who's never used you before.",
+        "You don't need a professional shoot for this. A few natural phone photos taken during a normal day, added to your website and Google listing over time, say \"this is a real, active business\" far more convincingly than one perfect photo ever could."
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "pulse-16-set-expectations",
+      "headline": "\"We'll get back to you\" loses customers — say when instead",
+      "description": "Vague replies like 'we'll get back to you' leave customers uncertain and likely to look elsewhere — telling them exactly when to expect a reply keeps them waiting instead.",
+      "paragraphs": [
+        "\"We'll get back to you\" sounds polite, but it tells a customer nothing, and uncertainty is exactly what pushes people to try a competitor instead. A specific answer — even a rough one — keeps them waiting instead of wondering.",
+        "Try replacing it with something concrete: \"I'll confirm availability and reply by this evening,\" or \"Someone will call you within the hour.\" It costs nothing extra to say, and it turns an anxious wait into a confident one — which is often the difference between a customer who sticks around and one who quietly moves on."
+      ],
+      "status": "queued"
+    }
+  ]
+}
