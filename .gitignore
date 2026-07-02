@@ -1,11 +1,2 @@
-# OS noise
-.DS_Store
-Thumbs.db
-
-# temp render/verification artifacts
-_*.png
-
-# vercel local
-.vercel/
-
-.vercel
+automation/__pycache__/
+*.pyc
