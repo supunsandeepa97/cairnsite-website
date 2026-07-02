@@ -15,6 +15,7 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- 3D backdrop (Three.js r185, deferred + capability-gated; importmap must precede module scripts) -->
@@ -54,7 +55,7 @@
 <style>
   :root{
     --pine:#0A4F33; --pine-700:#0D6342; --pine-900:#073A26;
-    --ink:#E7EAE7; --ink-soft:#aab3ab;
+    --ink:#E7EAE7; --ink-soft:#b7c0b8;
     --paper:transparent; --surface:rgba(255,255,255,.05); --surface-2:transparent; --card:rgba(255,255,255,.05); --paper-2:transparent;
     --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.06);
     --ember:#8FBFA3; --ember-700:#8FBFA3; --ember-soft:rgba(143,191,163,.16);
@@ -208,7 +209,9 @@
   .cairn-fixed svg.cairn-art{width:min(42vw,360px);opacity:.8;transition:opacity 1s ease}
   .cairn-fixed .cairn-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.1s ease}
   .cairn-fixed.cairn-3d-ready .cairn-canvas{opacity:1}
-  .cairn-fixed::after{content:"";position:absolute;inset:0;background:rgba(8,12,10,.62);pointer-events:none;z-index:1}
+  .cairn-fixed::after{content:"";position:absolute;inset:0;background:rgba(8,12,10,.68);pointer-events:none;z-index:1}
+  /* cinematic vignette: soft edge falloff above the scrim */
+  .cairn-fixed::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(120% 105% at 50% 42%, rgba(0,0,0,0) 0 46%, rgba(4,7,5,.45) 100%)}
   .cairn-fixed.cairn-3d-ready svg.cairn-art{opacity:0}
   html{background:#070b09}
   body{background:transparent;color:#E7EAE7}
@@ -216,12 +219,12 @@
   footer{position:relative;z-index:1;background:#070b09}
   header{background:rgba(9,15,12,.66);border-bottom:1px solid rgba(255,255,255,.08)}
   .wordmark{color:#EAEDEA} .wordmark b{color:#8FBFA3}
-  nav.main a{color:#aab3ab} nav.main a:hover{color:#fff} nav.main a::after{background:#8FBFA3}
+  nav.main a{color:#b7c0b8} nav.main a:hover{color:#fff} nav.main a::after{background:#8FBFA3}
   nav.main a.active{color:#fff} nav.main a.active::after{background:#8FBFA3}
   .eyebrow{color:#8FBFA3} .eyebrow::before{background:#6FA386}
 
   /* breadcrumb + back link */
-  .breadcrumb{color:#aab3ab} .breadcrumb a{color:#aab3ab} .breadcrumb a:hover{color:#8FBFA3}
+  .breadcrumb{color:#b7c0b8} .breadcrumb a{color:#b7c0b8} .breadcrumb a:hover{color:#8FBFA3}
   .breadcrumb span[aria-current]{color:#EFF1EE} .breadcrumb .sep{color:rgba(255,255,255,.3)}
   .back-link{color:#8FBFA3} .back-link:hover{color:#bfe0cf}
 
@@ -238,7 +241,7 @@
   /* WhatsApp CTA box — dark glass with sage accent edge */
   .cta-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-left:5px solid #8FBFA3;
     box-shadow:none;-webkit-backdrop-filter:blur(8px) saturate(140%);backdrop-filter:blur(8px) saturate(140%)}
-  .cta-box h2{color:#EFF1EE} .cta-box p{color:#aab3ab}
+  .cta-box h2{color:#EFF1EE} .cta-box p{color:#b7c0b8}
 
   /* related guides — dark glass */
   .related{border-top-color:rgba(255,255,255,.1)}

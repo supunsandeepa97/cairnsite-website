@@ -17,10 +17,15 @@ export function mountCairn(stageEl, opts){
   renderer.setClearColor(0x000000, 0);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, TIER === 'full' ? 2 : 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+  // exposure lowered 1.05 -> 0.92: caps highlight brightness so text over lit
+  // pebbles keeps >=4.5:1 contrast (measured, not eyeballed)
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 0.92;
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   const scene = new THREE.Scene();
+  // exponential depth fog toward the page background = cinematic depth falloff,
+  // rear pebbles melt into the dark instead of ending abruptly
+  scene.fog = new THREE.FogExp2(0x0a120e, 0.045);
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.025).texture;
 
@@ -28,7 +33,7 @@ export function mountCairn(stageEl, opts){
   camera.position.set(0, 0.5, 9.4); camera.lookAt(0, 0.35, 0);
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.45));
-  const key = new THREE.DirectionalLight(0xfff6ec, 2.4);
+  const key = new THREE.DirectionalLight(0xfff6ec, 2.1);
   key.position.set(4, 8, 6); key.castShadow = true;
   key.shadow.mapSize.set(2048,2048); key.shadow.camera.near=1; key.shadow.camera.far=30; key.shadow.radius=10; key.shadow.bias=-0.0002;
   scene.add(key);
@@ -78,6 +83,11 @@ export function mountCairn(stageEl, opts){
     rafId=requestAnimationFrame(tick); const dt=Math.min((now-t0)/1000,0.05); t0=now;
     intro += (0 - intro) * 0.02;
     progress += (progressTarget-progress)*0.06;
+    // slow cinematic camera drift (a gentle handheld dolly, not an effect)
+    var ct = now*0.001;
+    camera.position.x = Math.sin(ct*0.11)*0.22;
+    camera.position.y = 0.5 + Math.cos(ct*0.13)*0.12;
+    camera.lookAt(0, 0.35, 0);
     // travel across the viewport with scroll (sweeps right -> left -> right), drifting + scaling
     var wide = camera.aspect > 1.05;
     var range = wide ? 2.2 : 0.9;
